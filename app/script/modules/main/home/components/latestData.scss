@@ -1,0 +1,21 @@
+
+.list-card{
+    min-width: 400px;
+    max-width: 600px;
+    border: 1px solid #00aaef;
+    .list-card-title{
+        padding: 2px 8px;
+        background: #00aaef;
+        color: #ffffff;
+        line-height: 20px;
+        a{
+            float: right;
+            cursor: pointer;
+        }
+    }
+    .list-card-content{
+        li{
+            padding: 6px;
+        }
+    }
+}

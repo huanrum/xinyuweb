@@ -1,0 +1,30 @@
+{
+  "name": "xinyu-web",
+  "version": "1.0.1",
+  "description": "A web application",
+  "main": "main.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp web"
+  },
+  "keywords": [
+    "xinyu",
+    "web"
+  ],
+  "author": "Seto",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "node-sass": "^4.5.3"
+  },
+  "dependencies": {
+    "natives": "^1.1.6",
+    "process-nextick-args": "^2.0.0"
+  }
+}

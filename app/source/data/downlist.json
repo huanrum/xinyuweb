@@ -1,0 +1,38 @@
+[
+    {
+      "title" :"广东个人版(高中)",
+      "icon":"",
+      "info":"学生用于练习和备考英语口语听力的人机对话训练系统",
+      "steps":[
+        "第一步：下载并安装(先关闭杀毒软件和安全卫士避免误杀)",
+        "第二步：注册并登录(请使用手机号码或邮箱注册并登录)",
+        "第三步：在“我的激活码”手动添加激活码，输入激活码卡号，完成添加"
+      ],
+      "downurl":"https://pan.baidu.com/s/1mi5Jdpu"
+    },
+    {
+        "title" :"上海个人版（高中）",
+        "icon":"",
+        "info":"学生用于练习和备考英语口语听力的人机对话训练系统",
+        "steps":[
+          "第一步：下载并安装(先关闭杀毒软件和安全卫士避免误杀)",
+          "第二步：注册并登录(请使用手机号码或邮箱注册并登录)",
+          "第三步：在“我的激活码”手动添加激活码，输入激活码卡号，完成添加"
+        ],
+        "downurl":"http://pan.baidu.com/s/1slLSA0t"
+      },
+      {
+        "title" :"听说考试模拟系统（八年级上册）",
+        "icon":"",
+        "info":"学生用于练习和备考英语口语听力的人机对话训练系统",
+        "steps":[],
+        "downurl":"https://pan.baidu.com/s/1mhDJepM"
+      },
+      {
+        "title" :"口语无忧（安卓版）",
+        "icon":"source/data/androip.png",
+        "info":"最新版本V3.1.1<br>暂不支持苹果手机系统！",
+        "steps":[],
+        "downurl":"http://oswxx1cgl.bkt.clouddn.com/andriod/kouyuwuyou3.1.1.apk"
+      }
+]

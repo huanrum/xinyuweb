@@ -1,0 +1,22 @@
+
+.children-list{
+    .children-list-filter{
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        >*+*{
+            margin-left: 20px;
+        }
+        .tabs{
+            display: inline-block;
+            margin: 10px;
+            div{
+                padding: 3px 20px 3px 10px;
+            }
+            .active{
+                background: #00aaef;
+                color: #ffffff;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+
+.tabs{
+    background: #ffffff;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dbdbdb;
+    div{
+        cursor: pointer;
+        display: inline-block;
+        padding: 9px 20px 8px 10px;
+        font-size: 14px;
+        color:#333333;
+        span{
+            padding-left: 5px;
+        }
+    }
+    .active{
+        color:#017cb4;;
+        border-bottom: 2px solid #38a7e1;
+    }
+}

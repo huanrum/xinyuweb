@@ -1,0 +1,104 @@
+$lightblue:#0aa6e4;
+$leftMenuWidth: 214px;
+$pageWidth:"100% - #{$leftMenuWidth}";
+
+.home-page{
+    .header {
+        height:80px; 
+        background: url(source/images/main/header.png) no-repeat center top;
+        background-size: cover;
+        padding: 16px 20px;
+        img+img{
+            height:30px;
+            margin: 6px 20px;
+        }
+        .right{
+            cursor: pointer;
+            float:right;
+            line-height: 40px;
+            a{
+                color:#ffffff;
+                &:hover{
+                    border: none;
+                }
+                span{
+                    margin: 0 10px;
+                }
+                +a{
+                    margin-left:20px;
+                    padding-left: 20px;
+                    border-left: 1px solid #1f6cb0;
+                }
+            }
+        }
+    }
+    .left-menu{
+        background: url(source/images/main/left.png) no-repeat center top;
+        background-size: cover;
+        position: fixed;
+        left:0;
+        width:#{$leftMenuWidth};
+        height:100%;
+        padding-right: 4px;
+        .media{
+            padding: 8px;
+            .media-object{
+                height:45px;
+            }
+            .media-body{
+                display: inline-block;
+                line-height: 45px;
+                width:calc(#{$leftMenuWidth} - 70px);
+                padding-left: 1em;
+                color: #ffffff;
+                font-weight: 400;
+            }
+        }
+    }
+    .right-page{
+        position: fixed;
+        width:100%;
+        height:calc(100% - 70px);
+        overflow: auto;
+        background: #f4f3f3;
+        .loaction{
+            padding: 8px;
+            a{
+                margin: 2px;
+                font-size: 12px;
+                color:#333333;
+            }
+            a+a::before{
+                content: ">";
+            }
+        }
+        .content{
+            background: #eeeeee;
+            padding: 20px;
+            
+.page-title{
+    line-height:40px;
+    background: #ffffff;
+    margin-bottom:10px;
+    border-bottom: 1px solid #dbdbdb;
+    color:#333333;
+    font-size: 14px;
+    img{
+        margin: 0 10px;
+    }
+}
+
+.grid-content{
+    background: #ffffff;
+    width:100%;
+}
+        }
+        .info{
+            width: 100%;
+            font-size: 14px;
+            text-align: center;
+            padding: 0.5em 0 1em;
+            background: #ffffff;
+        }
+    }
+}

@@ -1,0 +1,98 @@
+
+.consumer-grid{
+    .no-data{
+        text-align: center;
+        margin: 15px;
+        min-height: 60px;
+        span{
+            display: inline-block;
+            font-size: 26px;
+            color: #dbdbdb;
+            transform: rotate(-15deg);
+        }
+    }
+    table.table.table-striped{
+        margin-bottom: 0;
+        text-align: center;
+        thead{
+            tr{
+                border: none;
+                color:#000000;
+                background: #c7d8e0;
+                border-bottom: 2px solid #ddd;
+                
+                th{
+                    padding: 8px;
+                    color:#333333;
+                    font-weight: bold;
+                }
+                th:first-child{
+                    padding-left: 20px;
+                }
+            }
+        }
+        tbody{
+            tr{
+                border: none;
+                border-bottom: 1px solid #ededed;
+            }
+            tr:nth-of-type(odd) {
+                background-color: #fafafa;
+            }
+            tr:hover{
+                background:#139ad9;
+                td{
+                    color:#ffffff!important;
+                    a,span {
+                        color:#ffffff!important; 
+                    }
+                }
+            }
+        }
+        td:first-child{
+            padding-left: calc(0.7em + 20px);
+        }
+        td{
+            border: none;
+            max-width: 200px;
+            margin: 0;
+            padding: 0.7em;
+            color:#666666;
+            font-size: 12px;
+            .point{
+                cursor: pointer;
+            }
+            span{
+                &.default{
+                    color:#139adb !important;
+                }
+                &.red{
+                    color:#ff0014 !important;  
+                }
+                &.gray{
+                    color:gray !important;  
+                }
+                &.disabled{
+                    color:#d3d3d3 !important;  
+                }
+            }
+            a{
+                cursor: pointer;
+                color:#139adb !important;
+                padding-right: 0.5rem;
+                &.red{
+                    color:#ff0014 !important;  
+                }
+                &.gray{
+                    color:gray !important;  
+                }
+                &.disabled{
+                    color:#d3d3d3 !important;  
+                }
+            }
+            a:hover{
+                opacity: 0.6;
+            }
+        }
+    }
+}

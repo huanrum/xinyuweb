@@ -1,0 +1,15 @@
+
+.landing-msgTotal{
+    a{
+        color: #00aaef;
+    }
+}
+.latest-data-panel{
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    >div{
+        margin: 10px 0;
+    }
+}

@@ -1,0 +1,78 @@
+
+.login-page{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url(source/images/login/bg.png) no-repeat center top #199cda;
+    background-size: cover;
+    padding: 60px 0;
+    margin: 0px;
+    text-align: center;
+    overflow: auto;
+    .logo img{
+        margin: 1em;
+    }
+    
+    
+    .form-group {
+        position: relative;
+        background: url(source/images/login/form.png);
+        background-size: cover;
+        width: 649px;
+        height: 344px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        font-weight: normal;
+        .title{
+            padding: 0.5em;
+            text-align: center;
+            color:#ffffff;
+        }
+        .form{
+            padding: 50px 20px 0 300px;
+            .qrcode{
+                cursor: pointer;
+                position: absolute;
+                width:50px;
+                top:15px;
+                right:15px;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+            iframe{
+                margin: -130px 0 0 20px;
+                transform: scale(0.7);
+            }
+            .input{
+                padding: 5px;
+                border-bottom: 1px solid #d3d3d3;
+                input{
+                    width:260px;
+                    padding-left: 1em;
+                    border: none;
+                }
+            }
+            .checkbox{
+                font-size:14px;
+                margin: 0.5em 5px;
+                text-align: left;
+            }
+            .btn {
+                color: #ffffff;
+                background: #149edf;
+            }
+            .link{
+                padding: 0.5em;
+                a {
+                    cursor: pointer;
+                    margin: 0 0.5em;
+                    color: #149edf;
+                }
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,246 @@
+@keyframes loading {
+    0%,40%,100%{ /*定义每帧的动作*/
+        transform: scaleY(0.5);
+        -webkit-transform: scaleY(0.5);
+        -moz-transform: scaleY(0.5);
+    }
+    20%{
+        transform: scaleY(1);
+        -webkit-transform: scaleY(1);
+        -moz-transform: scaleY(1);
+    }
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    min-width:806px
+}
+input,select{
+    padding-left:10px;
+}
+button{
+    display: inline-flex!important;
+    align-items: center;
+    justify-content: center;
+    img{
+        margin: 0 5px;
+    }
+}
+::-webkit-scrollbar-track-piece { //滚动条凹槽的颜色，还可以设置边框属性
+    background-color:#f8f8f8;
+    }
+    ::-webkit-scrollbar {//滚动条的宽度
+    width:9px;
+    height:9px;
+    }
+    ::-webkit-scrollbar-thumb {//滚动条的设置
+    background-color:#dddddd;
+    background-clip:padding-box;
+    min-height:28px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+    background-color:#bbb;
+    }
+
+input::-webkit-input-placeholder {
+    color: #666666 !important;
+    font-size: 12px;
+}
+
+input:-moz-placeholder {
+    color: #666666 !important;
+    font-size: 12px;
+}
+
+input::-moz-placeholder {
+    color: #666666 !important;
+    font-size: 12px;
+}
+
+input:-ms-input-placeholder {
+    color: #666666 !important;
+    font-size: 12px;
+}
+
+.margin-left-20{
+    margin-left: 20px;
+}
+
+.page-loading{
+    margin: 100px auto;
+    width: 70px;
+    height: 120px;
+    .ddr{
+        width: 10px;
+        height: 120px;
+        float: left;
+        margin: 2px;
+        background-color: #00ffff;
+        animation: loading 1s infinite ease-in-out;/*animation：动画名称 持续时间 动画速度曲线 延迟 执行多少次 是否正反方向轮流播放*/
+    }
+    .ddr2{
+        animation-delay: -0.9s;/*定义开始执行的地方，负号表示直接从第900ms开始执行*/
+    }
+    .ddr3{
+        animation-delay: -0.8s;
+    }
+    .ddr4{
+        animation-delay: -0.7s;
+    }
+    .ddr5{
+        animation-delay: -0.6s;
+    }
+}
+
+.loading{
+    position: fixed;
+    width: 100%;
+    height:100%;
+    top:0;
+    left:0;
+    background: rgba(0,0,0,0.8);
+    z-index:9999;
+    >*{
+        position: fixed;
+        top: 50%;
+        margin-left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 8px;
+        overflow: hidden;
+        color: #ffffff;
+    }
+    .error{
+        color:red;
+        background: #ffffff;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        padding: 0.5em;
+        text-align: center;
+    }
+}
+.return-message{
+    position: fixed;
+    right:5px;
+    top:85px;
+    z-index: 9999;
+    .return-message-item{
+        opacity: 0.6;
+        background: #dbdbdb;
+        border-radius: 8px;
+        width:200px;
+        min-height: 60px;
+        padding: 10px;
+        margin: 2px;
+    }
+}
+
+.add-item{
+    padding: 30px 35px;
+        background:#ffffff;
+        margin-bottom: 1em;
+        border-bottom: 1px solid #dbdbdb;
+        .bind-label{
+            color:#ff0014;
+            font-size: 12px;
+            padding: 0px 10px;
+            margin-bottom: 35px;
+        }
+        .add-contnet *{
+            display: inline-block;
+            width: initial;
+            padding: 0 10px;
+            color:#333333;
+            font-size:14px;
+        }
+        .add-contnet {
+            input{
+                width: 168px;
+                line-height: 26px;
+                min-height: 30px;
+                border: 1px solid #dbdbdb;
+            }
+            .btn{
+                margin: 0 5px;
+                background: #139ad8;
+                color:#ffffff;
+                font-size: 12px;
+                line-height: 26px;
+                width: 80px;
+            }
+        }
+        .add-body{
+            padding-top: 15px;
+            color:#666666;
+            font-size: 12px;
+            border-top: 1px solid #ededed;
+        }
+}
+
+.page-form{
+    background:#ffffff;
+    padding:25px 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #dbdbdb;
+    .page-form-item{
+        position: relative;
+        width: 436px;
+        height: 30px;
+        margin-bottom: 25px;
+        label{
+            margin: 0 20px 0 0 ;
+            color:#333333;
+            font-size: 14px;
+            width:96px;
+            text-align: right;
+            +label{
+                width: auto;
+                text-align: left;
+                padding: 10px;
+            }
+        }
+        input,select,.input{
+            width:320px;
+            border: 1px solid #dbdbdb;
+            min-height: 30px;
+            +.link{
+                cursor: pointer;
+                position: absolute;
+                float: right;
+                width: 90px;
+                min-height: 30px;
+                right: 0;
+                top: 1px;
+                border: 1px solid #139ad8;
+                text-align: center;
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
+        .btn{
+            cursor: pointer;
+            margin: 0 96px;
+            background: #139ad8;
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 26px;
+            width: 88px;
+            padding: 0;
+            &:hover{
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+
+.copyright{
+    color:#ffffff;
+    margin-top: 36px;
+    a{
+        color:#ffffff;
+        text-decoration: none;
+    }
+}

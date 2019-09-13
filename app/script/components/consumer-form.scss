@@ -1,0 +1,29 @@
+
+.consumer-form{
+    padding: 1em;
+    .row{
+        padding: 0.5em;
+        label{
+            width:120px;
+            font-weight: 800;
+            line-height: 30px;
+        }
+        span{
+            input,select{
+                width:258px;
+                height:30px;
+                padding: 0 0.5em;
+                border:1px solid #dbdbdb;
+            }
+            i{
+                color:red;
+            }
+        }
+    }
+    .actions{
+        margin: 1em 3em;
+        .btn{
+            margin: 0 1em;
+        }
+    }
+}

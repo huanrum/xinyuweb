@@ -1,0 +1,36 @@
+.paginations{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    a{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 6px;
+        line-height: 1.42857;
+        text-decoration: none;
+        color: #337ab7;
+        &.active{
+            background: #337ab7;
+            color:#ffffff;
+        }
+        &:hover{
+            background: #dbdbdb;
+        }
+    }
+    input{
+        width: 30px;
+        padding: 0;
+        height: 18px;
+        margin-right: 10px;
+        border: 1px solid #dbdbdb;
+    }
+    select{
+        width: 40px;
+        padding: 0;
+        border: 1px solid #dbdbdb;
+    }
+}

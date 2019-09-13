@@ -1,0 +1,19 @@
+.select-input{
+    position: relative;
+    display:inline-block;
+    select{
+        width: 100% !important;;
+        height:100%;
+        border: none!important;
+    }
+    input{
+        position: absolute;
+        top: 1px;
+        width: calc(100% - 32px)!important;
+        height: calc(100% - 2px);
+        border: none!important;
+    }
+    input:focus{
+        outline: none!important;
+    }
+}

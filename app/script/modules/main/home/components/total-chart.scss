@@ -1,0 +1,22 @@
+.total-chart{
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #ffffff;
+    width: 100%;
+    >div{
+        max-width: 400px;
+        padding: 10px;
+    }
+
+    table{
+        th{
+            background:#0d0d5f;
+            color:#ffffff;
+        }
+        td{
+            padding: 2px;
+            text-align: center;
+        }
+    }
+}
