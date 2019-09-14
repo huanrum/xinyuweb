@@ -1,4 +1,5 @@
 var Chartjs = require('../../../../../lib/Chart');
+var moment = require('../../../../../lib/moment');
 var service = require('../../../../service');
 
 var canvasNum = Date.now();
@@ -30,8 +31,8 @@ module.exports = {
     <div class="total-chart">
         <div>
             <div class="total-chart-search">
-                <input type="date" v-model="startDate" placeholder="输入开始时间">
-                <input type="date" v-model="endDate" placeholder="输入结束时间">
+                <input type="datetime" v-model="startDate" placeholder="输入开始时间">
+                <input type="datetime" v-model="endDate" placeholder="输入结束时间">
                 <button @click="getTotal">查询</button>
             </div>
             <div class="total-chart-info">
@@ -59,8 +60,8 @@ module.exports = {
         return {
             type: '表',
             types: ['表','柱','饼'], 
-            startDate: Date.now(),
-            endDate: Date.now(),
+            startDate: moment().add(-7,'days').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: moment().format('YYYY-MM-DD HH:mm:ss'),
             table: [],
             total: {
                 "total": 100,

@@ -1,4 +1,4 @@
-
+var moment = require('../../../../lib/moment');
 var common = require('../../../common');
 var service = require('../../../service');
 
@@ -7,8 +7,8 @@ module.exports = {
         <div class="children-list-filter">
             <span>
                 <span>时间</span>
-                <input type="date" v-model="startDate" placeholder="输入开始时间">
-                <input type="date" v-model="endDate" placeholder="输入结束时间">
+                <input type="datetime" v-model="startDate" placeholder="输入开始时间">
+                <input type="datetime" v-model="endDate" placeholder="输入结束时间">
             </span>
             <self-tabs :items="messageTypes" v-model="message"></self-tabs>
             <self-tabs :items="mediaTypes" v-model="media"></self-tabs>
@@ -23,8 +23,8 @@ module.exports = {
     </div>`,
     data:function(){
         return {
-            startDate:'',
-            endDate:'',
+            startDate: moment().add(-7,'days').format('YYYY-MM-DD HH:mm:ss'),
+            endDate: moment().format('YYYY-MM-DD HH:mm:ss'),
             message:'全部',
             media:'全部',
             searchType:'全文匹配',

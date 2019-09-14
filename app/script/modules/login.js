@@ -8,8 +8,8 @@ var service = require('./../service');
 module.exports = {
     template: `
     <div class="login-page">
-        <logo></logo>
         <div class="form-group">
+            <div class="login-page-outer"><logo></logo></div>
             <div class="title">用户登录</div>
             <div class="form">
                 <div>
@@ -69,7 +69,7 @@ module.exports = {
                     }
                     common.storage('username',this.username);
                     common.storage('password',this.password);
-                    this.$router.push({ name: 'home' });
+                    this.$router.push({ name: 'landing' });
                 },error=>{
                     this.errors.push(error.message);
                 });

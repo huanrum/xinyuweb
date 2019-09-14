@@ -195,13 +195,14 @@
                 target.fireEvent('on' + type);
             }
         };
-
+        var dateTypes = ['year','month','date','time','datetime'];
         document.addEventListener('click',function(e){
-            if(/^\s*date\s*$/.test(e.target.getAttribute('type')) && e.target.nodeName === 'INPUT' && !e.target.getAttribute('lay-key')){
+            var type = e.target.getAttribute('type') + '';
+            if(dateTypes.indexOf(type.trim()) && e.target.nodeName === 'INPUT' && !e.target.getAttribute('lay-key')){
                 e.target.type = '';
                 e.target.blur();
                 laydate.render({
-                    format:'yyyy/MM/dd',
+                    type: type.trim(),
                     elem: e.target //指定元素
                 });
                 e.target.addEventListener('blur',function(){
