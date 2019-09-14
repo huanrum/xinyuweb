@@ -198,7 +198,7 @@
         var dateTypes = ['year','month','date','time','datetime'];
         document.addEventListener('click',function(e){
             var type = e.target.getAttribute('type') + '';
-            if(dateTypes.indexOf(type.trim()) && e.target.nodeName === 'INPUT' && !e.target.getAttribute('lay-key')){
+            if(dateTypes.indexOf(type.trim()) !== -1 && e.target.nodeName === 'INPUT' && !e.target.getAttribute('lay-key')){
                 e.target.type = '';
                 e.target.blur();
                 laydate.render({
