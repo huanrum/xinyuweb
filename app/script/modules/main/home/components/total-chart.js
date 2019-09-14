@@ -29,27 +29,30 @@ module.exports = {
     template: `
     <div class="total-chart">
         <div>
-            <div>
+            <div class="total-chart-search">
                 <input type="date" v-model="startDate" placeholder="输入开始时间">
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
                 <button @click="getTotal">查询</button>
             </div>
-            <div>
-                自 {{startDate|date}} 至 {{endDate|date}} 
-                新余市检察院_环境 共采集 {{total.total}} 数据，
-                比上期增长了 {{total.increase}} ，
-                平均舆情态势值为 {{total.average}} 条，
-                其中舆情高峰出现在 {{total.peakDate}} ，峰值为 {{total.peakData}} 条。
+            <div class="total-chart-info">
+                自 <a>{{startDate|date}}</a> 至 <a>{{endDate|date}}</a>
+                新余市检察院_环境 共采集 <a>{{total.total}}</a> 数据，
+                比上期增长了 <a>{{total.increase}}</a> ，
+                平均舆情态势值为 <a>{{total.average}}</a> 条，
+                其中舆情高峰出现在 <a>{{total.peakDate}}</a> ，峰值为 <a>{{total.peakData}}</a> 条。
             </div>
         </div>
         <div>
+            <div class="total-chart-title">信息统计表格</div>
             ${table}
         </div>
         <div>
-            <canvas id="bar${canvasNum}"></canvas>
+            <div class="total-chart-title">信息数量分布图</div>
+            <canvas class="bar" id="bar${canvasNum}"></canvas>
         </div>
         <div>
-            <canvas id="pie${canvasNum}"></canvas>
+            <div class="total-chart-title">信息类型分布图</div>
+            <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
         </div>
     </div>`,
     data:function(){
@@ -69,31 +72,30 @@ module.exports = {
         }
     },
     mounted () {
-        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {});
-        this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {scaleShowGridLines : true});
+        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {responsive: true,legend: {position: "left"}});
+        this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {legend:{display:false}, scaleShowGridLines : true});
         this.getTotal();
     },
     methods: {
         getTotal() {
-            const sum = (...args) => {
+            const sum = (args) => {
                 var result = 0;
                 args.forEach(i=>result+=i);
                 return result;
+            }
+            const color = (args) => {
+                return args.map((v,i) => '#' + new Date(10000).setYear(i).toString(16).slice(-8, -2));
             }
             service.organ1(this.startDate, this.endDate).then(data => {
                 this.total = data.total;
                 this.table = data.table;
                 
                 this.bar.data.labels = data.table.map(i=>i.name);
-                this.bar.data.datasets[0] = {label:'信息数量分布图', data:data.table.map(i=>sum(...i.count))};
+                this.bar.data.datasets[0] = {data:data.table.map(i=>sum(i.count))};
                 this.bar.update();
 
-                this.pie.data.datasets[0] = {label:'信息类型分布图', data: ['新闻','论坛','微博','微信','预警'].map((v,i)=>({
-                    value: sum(...data.table.map(t=>t.count[i])),
-                    color:"#F7464A",
-                    highlight: "#FF5A5E",
-                    label: v
-                }))};
+                this.pie.data.labels = ['新闻','论坛','微博','微信','预警'];
+                this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(data.table.map(t=>t.count[i])))};
                 this.pie.update();
             })
         },

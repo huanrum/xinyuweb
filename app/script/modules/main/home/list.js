@@ -13,7 +13,7 @@ module.exports = {
             <self-tabs :items="messageTypes" v-model="message"></self-tabs>
             <self-tabs :items="mediaTypes" v-model="media"></self-tabs>
             <self-tabs :items="searchTypes" v-model="searchType"></self-tabs>
-            <input type="text" v-model="search" placeholder="输入结束时间">
+            <input type="text" v-model="search" placeholder="输入关键字">
             <button @click="organList">查询</button>
         </div>
         <br>
@@ -33,7 +33,7 @@ module.exports = {
             mediaTypes: ["全部","纸媒","网媒"].map(i=>({title:i,name:i})),
             searchTypes: ['全文匹配','精确匹配'].map(i=>({title:i,name:i})),
             columns:[
-                {title:'标题', field:'title'},
+                {title:'标题', field:'title',formatter: this.titleHtml},
                 {title:'发布时间', field:'date'}
             ],
             actions:[
@@ -60,6 +60,9 @@ module.exports = {
         },
         firePoint(item){
             service.firepoint(item.id).then(() => item.fire = !item.fire);
+        },
+        titleHtml(item, field){
+            return `<a>${field}</a><div>${item[field]}</div><div>${item}</div>`;
         }
     }
 };

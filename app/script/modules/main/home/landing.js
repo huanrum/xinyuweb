@@ -37,7 +37,7 @@ module.exports = {
         },
         getTypes() {
             service.organ().then(res => {
-                this.types = res.map(i => ({...i, title:i.name}))
+                this.types = res.map(i => Object.assign(i,{title:i.name}))
             });
         },
 

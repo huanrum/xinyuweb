@@ -10,10 +10,10 @@ module.exports = {
         { name: 'landing', path: '/landing', component: landing },
         { name: 'list', path: '/list', component: list },
     ],
-    template: `<div class="landing-page">
-            <div class="landing-msgTotal">
+    template: `<div class="home-page">
+            <div class="home-msgTotal">
                 <span>24 小时监测到</span>
-                <span class="landing-msgTotal-item" v-for="mt in msgTotals">
+                <span class="home-msgTotal-item" v-for="mt in msgTotals">
                     <span>{{mt.titel}}</span>
                     <a>{{mt.count}}</a>
                     <span>条</span>
@@ -22,7 +22,7 @@ module.exports = {
             <br>
             <div class="tabs">
                 <div v-for="menu in types" @click="gotoList(menu.name)" :class="{'active':menu.name==active}">
-                    <i :class="'tab-'+menu.name"></i><span>{{menu.name|language}}</span>
+                    <i :class="'tab-'+menu.name"></i><span>{{menu.name|language}}</span><sup v-if="!!menu.count">{{menu.count}}</sup>
                 </div>
             </div>
             <div>

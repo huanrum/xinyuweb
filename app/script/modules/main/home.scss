@@ -1,7 +1,19 @@
-.landingl{
-    .landing-msgTotal{
-        .landing-msgTotal-item{
-            color:#00aaef;
+.home-page{
+    .home-msgTotal{
+        .home-msgTotal-item{
+            a{
+                cursor: pointer;
+                color:#74142c!important;
+                text-decoration: underline;
+            }
+        }
+    }
+    .tabs{
+        sup{
+            border-radius: 50%;
+            background: red;
+            color: #ffffff;
+            padding: 1px 5px;
         }
     }
 }

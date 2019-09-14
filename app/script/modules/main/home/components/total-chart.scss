@@ -5,18 +5,49 @@
     background: #ffffff;
     width: 100%;
     >div{
-        max-width: 400px;
+        max-width: 440px;
         padding: 10px;
+        .total-chart-title{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    }
+
+    .total-chart-search{
+
+    }
+    .total-chart-info{
+        margin: 30px 10px;
+        a{
+            cursor: pointer;
+            color: #00aaef;
+        }
     }
 
     table{
+        caption{
+            text-align: center;
+            caption-side: top;
+        }
+        th,td{
+            padding: 5px;
+            text-align: center;
+        }
         th{
             background:#0d0d5f;
             color:#ffffff;
         }
-        td{
-            padding: 2px;
-            text-align: center;
+    }
+
+    canvas{
+        width: 100%;
+        height: 100%;
+        min-width: 500px;
+        &.bar{
+            transform: translate(-100px, 23px);
+        }
+        &.pie{
+            transform: translate(-60px, 0px);
         }
     }
 }

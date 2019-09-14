@@ -11,21 +11,25 @@ module.exports = {
                 <thead>
                     <tr>
                         <th v-if="!!hasno"><span>{{'序号'|language}}</span></th>
-                        <th v-for="column in columns"><span>{{column.title|language}}</span></th>
+                        <th v-for="column in columns" :width="column.width"><span>{{column.title|language}}</span></th>
                         <th v-if="!!actions.length"><span>{{'操作'|language}}</span></th>
                     </tr>
                 </thead>
             <tbody>
                 <tr v-for="(item,$index) in items" @dblclick="$emit('dblclick',item)" :class="{select:select===item}">
-                    <td v-if="!!hasno">{{$index+1}}</td>
+                    <td v-if="!!hasno"><div>{{$index+1}}</div></td>
                     <td v-for="column in columns">
-                        <span v-html="value(item,column)" :class="getclass(column,item)" @click="action(column,item)"></span>
-                        <span v-if="!!column.actions">
-                            <a class="action" v-for="ac in column.actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
-                        </span>
+                        <div>
+                            <span v-html="value(item,column)" :class="getclass(column,item)" @click="action(column,item)"></span>
+                            <span v-if="!!column.actions">
+                                <a class="action" v-for="ac in column.actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
+                            </span>
+                        </div>
                     </td>
                     <td v-if="!!actions.length">
-                        <a class="action" v-for="ac in actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
+                        <div>
+                            <a class="action" v-for="ac in actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
+                        </div>
                     </td>
                 </tr>
                 

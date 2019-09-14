@@ -13,9 +13,18 @@
             cursor: pointer;
         }
     }
-    .list-card-content{
+    ul.list-card-content{
+        list-style: none;
+        padding: 5px;
         li{
             padding: 6px;
+            &:nth-child(2n){
+                background: #f3f3f3;
+            }
+            &:hover{
+                cursor: pointer;
+                opacity: 0.8;
+            }
         }
     }
 }
