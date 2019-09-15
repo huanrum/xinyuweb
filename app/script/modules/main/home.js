@@ -15,14 +15,14 @@ module.exports = {
             <div class="home-msgTotal">
                 <span>24 小时监测到</span>
                 <span class="home-msgTotal-item" v-for="mt in msgTotals">
-                    <span>{{mt.titel}}</span>
+                    <span>{{mt.name}}</span>
                     <a>{{mt.count}}</a>
                     <span>条</span>
                 </span>
             </div>
             <br>
             <div class="tabs">
-                <div v-for="menu in types" @click="gotoList(menu.name)" :class="{'active':menu.name==active}">
+                <div v-for="menu in types" @click="gotoList(menu.cata_one)" :class="{'active':menu.cata_one==active}">
                     <i :class="'tab-'+menu.name"></i><span>{{menu.name|language}}</span><sup v-if="!!menu.count">{{menu.count}}</sup>
                 </div>
             </div>

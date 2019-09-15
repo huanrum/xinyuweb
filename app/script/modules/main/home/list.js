@@ -55,7 +55,7 @@ module.exports = {
         organList(page) {
             service.organList(this.$route.query.type, page, this.startDate,this.endDate,this.message,this.media,this.searchType,this.search).then(data => {
                 this.items = data.rows;
-                this.datacount = data.pageSize;
+                this.datacount = data.total;
             })
         },
         updatetag(item){

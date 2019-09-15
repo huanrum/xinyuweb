@@ -9,7 +9,8 @@ module.exports = (function(){
     var isvalue = v=>typeof v !== 'undefined';
     return {
         copyright:'Copyright ©2018 ky51.cn All Rights Reserved.  <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备12072665号-4</a>',
-        baseurl : 'http://localhost:8888/xinyu/xyswap/',
+        baseurl: 'http://localhost:8888/xinyu/',
+        // baseurl: 'http://218.87.99.93:8080',
         /**
          * 一次请求的数据条数
          */

@@ -4,24 +4,16 @@ var service = require('../../../../service');
 
 var canvasNum = Date.now();
 var table = `
-            <table border="1">
+            <table border="1" v-if="!!table.length">
                 <tr>
                     <th>区域</th>
-                    <th>新闻</th>
-                    <th>论坛</th>
-                    <th>微博</th>
-                    <th>微信</th>
-                    <th>预警</th>
+                    <th v-for="column in table[0].items">{{column.src_name}}</th>
                     <th>总数</th>
                 </tr>
                 <tr v-for="t in table">
-                    <td>{{t.name}}</td>
-                    <td>{{t.count[0]}}</td>
-                    <td>{{t.count[1]}}</td>
-                    <td>{{t.count[2]}}</td>
-                    <td>{{t.count[3]}}</td>
-                    <td>{{t.count[4]}}</td>
-                    <td>{{t.count[5]}}</td>
+                    <td>{{t.typename}}</td>
+                    <td v-for="it in t.items">{{it.count}}</td>
+                    <td>{{t.count}}</td>
                 </tr>
             </table>
 `
@@ -91,12 +83,12 @@ module.exports = {
                 this.total = data.total;
                 this.table = data.table;
                 
-                this.bar.data.labels = data.table.map(i=>i.name);
-                this.bar.data.datasets[0] = {data:data.table.map(i=>sum(i.count))};
+                this.bar.data.labels = data.table.map(i=>i.typename);
+                this.bar.data.datasets[0] = {data:data.table.map(i=>i.count)};
                 this.bar.update();
 
-                this.pie.data.labels = ['新闻','论坛','微博','微信','预警'];
-                this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(data.table.map(t=>t.count[i])))};
+                this.pie.data.labels = data.table[0].items.map(i=>i.src_name);
+                this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(data.table.map(t=>t.items[i].count)))};
                 this.pie.update();
             })
         },
