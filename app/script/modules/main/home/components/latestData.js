@@ -9,10 +9,11 @@ module.exports = {
             <span v-show="!!totalToday()">[今日 {{totalToday()}}]</span>
             <a @click="latestData">刷新</a>
         </div>
+        <div class="list-card-noitem" v-show="!items.length"><span>没有数据</span></div>
         <ul class="list-card-content">
             <li class="list-card-content-item" v-for="item in items" @click="openDetail(item)">
                 <div class="row1" :title="item.summary">
-                    <a>[{{item.src_name}}]</a><span>{{item.title}}</span><i>{{item.data_rksj_create|date}}</i>
+                    <a>[{{item.src_name}}]</a><span>{{item.title}}</span><i>{{item.data_rksj_create|date('MM-DD HH:mm')}}</i>
                 </div>
                 <div class="row2">
                     <span>机构 {{item.cata_one|cata_one}}</span>
@@ -30,7 +31,7 @@ module.exports = {
     },
     methods: {
         latestData() {
-            service.latestData(this.type.name).then(data => this.items = data.rows)
+            service.latestData(this.type.cata_one).then(data => this.items = data.rows)
         },
         totalToday(){
             var today = moment().format('YYYY-MM-DD');

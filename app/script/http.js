@@ -143,24 +143,26 @@ module.exports = (function () {
                     var respon = JSON.parse(res||'{}');
 
                     if (!respon.code || respon.code == 1000) {
-                        console.log(url, JSON.parse(JSON.stringify(params||null)),respon.data);
+                        common.log(url, JSON.parse(JSON.stringify(params||null)),respon.data);
                         togleLoading(url, -1);
                         resole(respon.data);
                     }else if(respon.code == 813 && rCount>0){
-                        console.log(url, JSON.parse(JSON.stringify(params||null)),respon.message +',重新发起请求');
+                        common.log(url, JSON.parse(JSON.stringify(params||null)),respon.msg +',重新发起请求');
                         http(url, params, extendData, rCount-1).then(resole, reject);
                     }else {
-                        console.log(url, JSON.parse(JSON.stringify(params||null)),respon.message);
+                        common.log(url, JSON.parse(JSON.stringify(params||null)),respon.msg);
                         if (manageError(respon)) {
-                            togleLoading(url, respon.message);
+                            togleLoading(url, respon.msg);
                             reject(respon);
                         }else{
                             togleLoading();
                         }
                     }
                 },error=>{
+                    var App = require('./common').root();
+                    var errors = [error.message].concat(App.$route.query.errors || []);
                     togleLoading(url, error.message);
-                    require('./common').root().$router.push({name:'error',query:{errors:error.message}});
+                    App.$router.push({name:'error',query:{errors}});
                 });
             }
             catch (e) {

@@ -27,7 +27,7 @@ module.exports = {
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
                 <button @click="getTotal">查询</button>
             </div>
-            <div class="total-chart-info">
+            <div class="total-chart-info" v-if="!!total">
                 自 <a>{{startDate|date}}</a> 至 <a>{{endDate|date}}</a>
                 新余市检察院_环境 共采集 <a>{{total.total}}</a> 数据，
                 比上期增长了 <a>{{total.increase}}</a> ，
@@ -35,13 +35,14 @@ module.exports = {
                 其中舆情高峰出现在 <a>{{total.peakDate}}</a> ，峰值为 <a>{{total.peakData}}</a> 条。
             </div>
         </div>
-        <div class="total-chart-grid">
+        <div class="total-chart-grid" v-show="!!table.length">
             <self-tabs :items="types" v-model="type"></self-tabs>
             <div v-show="type===0">
                 ${table}
             </div>
             <div v-show="type===1">
                 <canvas class="bar" id="bar${canvasNum}"></canvas>
+                <div style="position: absolute;width: 120px;height: 25px;background: #ffffff;top: 12px;left: 323px;"></div>
             </div>
             <div v-show="type===2">
                 <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
@@ -56,17 +57,11 @@ module.exports = {
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             table: [],
-            total: {
-                "total": 100,
-                "increase": 10,
-                "average": 12,
-                "peakDate": "2019/9/19",
-                "peakData": 20
-            }
+            total: null
         }
     },
     mounted () {
-        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {responsive: true,legend: {position: "left"}});
+        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {responsive: true,legend: {position: 'right'}});
         this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {legend:{display:false}, scaleShowGridLines : true});
         this.getTotal();
     },

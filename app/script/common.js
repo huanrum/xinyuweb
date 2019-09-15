@@ -1,5 +1,4 @@
 var Vue = require('./../lib/vue/vue');
-var toexel = require('./../lib/toexel');
 
 /**
  * 一些公用的功能方法
@@ -7,9 +6,10 @@ var toexel = require('./../lib/toexel');
 module.exports = (function(){
     var dialog = null,root = null,cache = {},accountRefshList = [];
     var isvalue = v=>typeof v !== 'undefined';
+    var fullKey = key => '[xinyu]/'+key;
     var getBaseUrl = () => {
-        if(localStorage['xinyu/baseUrl']){
-            return localStorage['xinyu/baseUrl'];
+        if(localStorage[fullKey('baseUrl')]){
+            return localStorage[fullKey('baseUrl')];
         } else if(location.hostname === '127.0.0.1'){
             return 'http://localhost:8888/xinyu/';
         }else {
@@ -64,10 +64,15 @@ module.exports = (function(){
                 accountRefshList.push(value);
             }else if(isvalue(value)){
                 value.user_id = value?value.token.split('|').pop():'';
-                this.storage('[xinyu]/account',JSON.stringify(value));
+                this.storage('account',JSON.stringify(value));
                 accountRefshList.forEach(i=>i());
             }else{
-                return JSON.parse(this.storage('[xinyu]/account')||'{}')||{};
+                return JSON.parse(this.storage('account')||'{}')||{};
+            }
+        },
+        log:function(){
+            if(/^(localhost|127.0.0.1)$/.test(location.hostname)){
+                console.log.apply(console, arguments);
             }
         },
         cache:function(key,value){
@@ -78,24 +83,19 @@ module.exports = (function(){
             }
         },
         storage:function(key,value,local){
+            var $fullKey = fullKey(key);
             if(local){
                 if(value){
-                    localStorage['[xinyu]/'+key] = value;
+                    localStorage[$fullKey] = value;
                 }else{
-                    delete localStorage['[xinyu]/'+key];
+                    delete localStorage[$fullKey];
                 }
             }
             if(isvalue(value)){
-                sessionStorage['[xinyu]/'+key] = value;
+                sessionStorage[$fullKey] = value;
             }else{
-                return sessionStorage['[xinyu]/'+key] || localStorage['[xinyu]/'+key];
+                return sessionStorage[$fullKey] || localStorage[$fullKey];
             }
-        },
-        /**
-         * 导出表格
-         */
-        toexel:function(){
-            return toexel.apply(this,arguments);
         },
         /**
          * 弹窗

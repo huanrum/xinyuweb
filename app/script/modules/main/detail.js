@@ -16,13 +16,13 @@ module.exports = {
                 <span>一级分类 <a>{{subInfo.cata_one|cata_one}}</a></span><span>机构 <a>{{subInfo.cata_one|cata_one}}</a><span>
             </div>
         </div>
-        <div class="detail-content" v-html="mark(originalData.summary)"></div>
+        <div class="detail-content" v-html="mark(text)"></div>
     </div>`,
     data:function(){
         return {
             subInfo: {},
             lightKeywords: '',
-            originalData: {}
+            text: ''
         }
     },
     created () {
@@ -32,11 +32,11 @@ module.exports = {
         detail(){
             service.detail(this.$route.query.id).then(res=>{
                 Object.assign(this, res);
-                document.title =  res.originalData.title;
+                document.title =  res.subInfo.title;
             });
         },
         mark(str){
-            return str;
+            return (str || '').replace(/\n/g,'<br>');
         }
     }
 };

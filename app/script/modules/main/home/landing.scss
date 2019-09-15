@@ -2,10 +2,9 @@
 
 .latest-data-panel{
     display: inline-flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap;
     >div{
-        margin: 10px 0;
+        margin: 20px 10px 20px 0;
     }
 }

@@ -13,6 +13,17 @@
             cursor: pointer;
         }
     }
+    .list-card-noitem{
+        text-align: center;
+        margin: 15px;
+        min-height: 60px;
+        span{
+            display: inline-block;
+            font-size: 26px;
+            color: #dbdbdb;
+            transform: rotate(-15deg);
+        }
+    }
     ul.list-card-content{
         list-style: none;
         padding: 5px;

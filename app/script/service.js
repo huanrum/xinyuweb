@@ -76,13 +76,14 @@ module.exports = (function () {
          * 分类信息
          */
         latestData(organType){
-            return http('/summary/latestData', {organType:organType});
+            var date = common.storage('latestData-date');
+            return http('/summary/latestData', {date,organType});
         },
         /**
          * 分类信息
          */
-        organList(startDate, endDate, organType, keyword, inforType, page){
-            return http('/summary/organList', {startDate, endDate, organType, keyword, inforType, page});
+        organList(organType, pageNo, pageSize, startDate, endDate, inforType, isAccurate, keyword){
+            return http('/summary/organList', {organType, pageNo, pageSize, startDate, endDate, inforType, isAccurate, keyword});
         },
         /**
          * 修改是否为热点
