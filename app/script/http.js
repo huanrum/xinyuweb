@@ -119,6 +119,9 @@ module.exports = (function () {
      * 最终的API调用
      */
     function http(url, params, extendData, rCount) {
+        if(location.hostname === '127.0.0.1'){
+            return '';
+        }
         return new Promise(function (resole, reject) {
             var bodyData = JSON.stringify(params);
             var headers = {

@@ -1,0 +1,22 @@
+.detail-body{
+    .detail-title{
+        h2{
+            display: inline-block;
+            width: calc(100% - 2em);
+            text-align: center;
+        }
+    }
+    .detail-info{
+        margin: 15px;
+        text-align: center;
+        a{
+            color: #00aaef;
+        }
+        span+span{
+            margin-left: 20px;
+        }
+    }
+    .detail-content{
+        padding: 0 20px;
+    }
+}

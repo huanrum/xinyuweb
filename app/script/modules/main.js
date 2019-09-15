@@ -5,12 +5,15 @@ var service = require('../service');
 var changepassword = require('./main/components/changepassword');
 
 var home = require('./main/home');
+var detail = require('./main/detail');
+
 /**
  * 承载所有页面的容器
  */
 module.exports = {
     routers: [
         { name: 'home', path: '/home', component: home, children: home.routers },
+        { name: 'detail', path: '/detail', component: detail },
     ],
     components: {
         changepassword: changepassword

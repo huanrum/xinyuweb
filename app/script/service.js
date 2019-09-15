@@ -47,7 +47,12 @@ module.exports = (function () {
          * 一级类型
          */
         organ:function(){
-            return http('organ');
+            return new Promise(function(resolve){
+                http('organ').then(res => {
+                    common.cache('cata_ones', res);
+                    resolve(res);
+                });
+            });
         },
         /**
          * 某段时间范围的统计数据

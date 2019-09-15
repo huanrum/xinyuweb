@@ -4,6 +4,7 @@ var service = require('../../service');
 
 var landing = require('./home/landing');
 var list = require('./home/list');
+var detail = require('./detail');
 
 module.exports = {
     routers: [
@@ -53,7 +54,6 @@ module.exports = {
         getTypes() {
             service.organ().then(res => {
                 this.types = res;
-                common.cache('cata_ones', res);
             });
         },
 
