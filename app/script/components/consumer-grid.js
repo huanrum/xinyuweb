@@ -20,15 +20,15 @@ module.exports = {
                     <td v-if="!!hasno"><div>{{$index+1}}</div></td>
                     <td v-for="column in columns">
                         <div>
-                            <span v-html="value(item,column)" :class="getclass(column,item)" @click="action(column,item)"></span>
+                            <span v-html="value(item,column)" :class="getclass(column,item)" @click="action($event,column,item)"></span>
                             <span v-if="!!column.actions">
-                                <a class="action" v-for="ac in column.actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
+                                <a class="action" v-for="ac in column.actions" :class="getclass(ac,item)" @click="action($event,ac,item)">{{gettitle(ac,item)|language}}</a>
                             </span>
                         </div>
                     </td>
                     <td v-if="!!actions.length">
                         <div>
-                            <a class="action" v-for="ac in actions" :class="getclass(ac,item)" @click="action(ac,item)">{{gettitle(ac,item)|language}}</a>
+                            <a class="action" v-for="ac in actions" :class="getclass(ac,item)" @click="action($event,ac,item)">{{gettitle(ac,item)|language}}</a>
                         </div>
                     </td>
                 </tr>
@@ -78,11 +78,11 @@ module.exports = {
             var _class = typeof action.class === 'function'? action.class(item) : action.class;
             return (_class || '') + ' ' + (disabled?'disabled':'')
         },
-        action:function(action,item){
+        action:function(e, action,item){
             var disabled = typeof action.disabled === 'function'? action.disabled(item) : action.disabled;
             this.select = item;
             if(!disabled && action.fn){
-                action.fn(item,this);
+                action.fn(e,item,this);
             }
         },
         value:function(item,column){

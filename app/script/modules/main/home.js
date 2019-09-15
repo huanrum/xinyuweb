@@ -47,12 +47,13 @@ module.exports = {
     methods: {
         msgTotal() {
             service.msgTotal().then(res => {
-                this.msgTotals = res
+                this.msgTotals = res;
             });
         },
         getTypes() {
             service.organ().then(res => {
                 this.types = res;
+                common.cache('cata_ones', res);
             });
         },
 

@@ -1,3 +1,4 @@
+var Vue = require('./../lib/vue/vue');
 var toexel = require('./../lib/toexel');
 
 /**
@@ -104,6 +105,9 @@ module.exports = (function(){
                 var d = "0"+date.getDate();
                 return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
             }
+        },
+        filter: function(name){
+            return Vue.filter(name);
         },
         /**
          * 选择文件

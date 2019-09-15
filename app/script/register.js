@@ -13,6 +13,7 @@ var selectInput = require('./components/select-input');
 
 var language = require('./filters/language');
 var date = require('./filters/date');
+var cata_one = require('./filters/cata_one');
 
 Vue.component('logo',logo);
 Vue.component('left-menu',leftMenu);
@@ -25,3 +26,4 @@ Vue.component('select-input',selectInput);
 
 Vue.filter('language',language);
 Vue.filter('date',date);
+Vue.filter('cata_one',cata_one);

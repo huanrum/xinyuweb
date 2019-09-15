@@ -1,6 +1,7 @@
 
 var main = require('./modules/main');
 var login = require('./modules/login');
+var detail = require('./modules/detail');
 
 
 
@@ -12,6 +13,9 @@ module.exports = function routers() {
     return [
         { 
             name: 'login', path: '/login', component: login 
+        },
+        { 
+            name: 'detail', path: '/detail', component: detail 
         },
         { 
             name: 'main', path: '/', component: main, title: '主页', icon: '', children: main.routers 

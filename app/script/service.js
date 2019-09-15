@@ -67,9 +67,17 @@ module.exports = (function () {
         organList(startDate, endDate, organType, keyword, inforType, page){
             return http('organList', {startDate, endDate, organType, keyword, inforType, page});
         },
-
-        firepoint(id){
-            return http('firepoint', {id});
+        /**
+         * 修改是否为热点
+         */
+        updatetag(id,tag){
+            return http('updatetag', {id,tag});
+        },
+        /**
+         * 详情
+         */
+        detail(id){
+            return http('detail', {id});
         }
     };
 })();
