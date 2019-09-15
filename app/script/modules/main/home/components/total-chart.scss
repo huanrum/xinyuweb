@@ -1,15 +1,25 @@
 .total-chart{
     display: inline-flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     background: #ffffff;
     width: 100%;
     >div{
         max-width: 460px;
         padding: 10px;
-        .total-chart-title{
-            text-align: center;
-            margin-bottom: 10px;
+    }
+
+    .total-chart-grid{
+        max-width: 800px;
+        margin-left: 20px;
+        padding-left: 150px;
+        position: relative;
+        .tabs{
+            position: absolute;
+            top: 0;
+            left: 0;
+            >div{
+                display: block;
+            }
         }
     }
 
@@ -32,9 +42,12 @@
         th,td{
             padding: 5px;
             text-align: center;
+            a{
+                color: #00aaef;
+            }
         }
         th{
-            background:#0d0d5f;
+            background:#00aaef;
             color:#ffffff;
         }
     }

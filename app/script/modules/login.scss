@@ -11,10 +11,12 @@
     overflow: auto;
     .logo img{
         margin: 1em;
+        zoom: 2;
+        transform: translateY(-2px);
     }
 
     .login-page-outer{
-        margin-top: -123px;
+        margin-top: -135px;
         padding: 20px;
     }
     

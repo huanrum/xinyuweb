@@ -1,4 +1,4 @@
-
+var moment = require('../../../../../lib/moment');
 var service = require('../../../../service');
 
 module.exports = {
@@ -6,6 +6,7 @@ module.exports = {
     template: `<div class="list-card">
         <div class="list-card-title">
             <span>{{type.name}}</span>
+            <span v-show="!!totalToday()">[今日 {{totalToday()}}]</span>
             <a @click="latestData">刷新</a>
         </div>
         <ul class="list-card-content">
@@ -30,6 +31,10 @@ module.exports = {
     methods: {
         latestData() {
             service.latestData(this.type.name).then(data => this.items = data.rows)
+        },
+        totalToday(){
+            var today = moment().format('YYYY-MM-DD');
+            return this.items.filter(i=>i.pub_time === today).length;
         },
         openDetail(item){
             window.open(location.href.replace(location.hash, '#/detail?id=' + item.id));

@@ -9,7 +9,7 @@ module.exports = {
     template: `
     <div class="landing-page">
         <div>
-            <totalChart></totalChart>
+            <totalChart ></totalChart>
         </div>
         <div class="latest-data-panel">
             <latestData v-for="type in types" :type="type"></latestData>
@@ -39,10 +39,6 @@ module.exports = {
             service.organ().then(res => {
                 this.types = res.map(i => Object.assign(i,{title:i.name}))
             });
-        },
-
-        gotoList(type) {
-            this.$router.push({name:'list', query: {type: type}});
         }
     }
 };

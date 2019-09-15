@@ -30,7 +30,8 @@ module.exports = (function () {
          */
         login: function (username, password) {
             return new Promise(function (resole) {
-                http('/user/login', { login: username, password: password }).then(function (data) {
+                http('/user/login', { username, password }).then(function (data) {
+                    data = data || {username:username, token: username + Date.now()};
                     common.storage('token', data.token);
                     common.account(data);
                     resole(data);

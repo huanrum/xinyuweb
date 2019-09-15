@@ -7,10 +7,18 @@ var toexel = require('./../lib/toexel');
 module.exports = (function(){
     var dialog = null,root = null,cache = {},accountRefshList = [];
     var isvalue = v=>typeof v !== 'undefined';
+    var getBaseUrl = () => {
+        if(localStorage['xinyu/baseUrl']){
+            return localStorage['xinyu/baseUrl'];
+        } else if(location.hostname === '127.0.0.1'){
+            return 'http://localhost:8888/xinyu/';
+        }else {
+            return 'http://218.87.99.93:8080';
+        }
+    };
     return {
         copyright:'Copyright ©2018 ky51.cn All Rights Reserved.  <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备12072665号-4</a>',
-        baseurl: 'http://localhost:8888/xinyu/',
-        // baseurl: 'http://218.87.99.93:8080',
+        baseurl: getBaseUrl(),
         /**
          * 一次请求的数据条数
          */

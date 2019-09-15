@@ -12,7 +12,7 @@ var table = `
                 </tr>
                 <tr v-for="t in table">
                     <td>{{t.typename}}</td>
-                    <td v-for="it in t.items">{{it.count}}</td>
+                    <td v-for="it in t.items" @click="gotoList(t.cata_one)">{{it.count}}</td>
                     <td>{{t.count}}</td>
                 </tr>
             </table>
@@ -23,8 +23,8 @@ module.exports = {
     <div class="total-chart">
         <div>
             <div class="total-chart-search">
-                <input type="datetime" v-model="startDate" placeholder="输入开始时间">
-                <input type="datetime" v-model="endDate" placeholder="输入结束时间">
+                <input type="date" v-model="startDate" placeholder="输入开始时间">
+                <input type="date" v-model="endDate" placeholder="输入结束时间">
                 <button @click="getTotal">查询</button>
             </div>
             <div class="total-chart-info">
@@ -35,25 +35,26 @@ module.exports = {
                 其中舆情高峰出现在 <a>{{total.peakDate}}</a> ，峰值为 <a>{{total.peakData}}</a> 条。
             </div>
         </div>
-        <div>
-            <div class="total-chart-title">信息统计表格</div>
-            ${table}
-        </div>
-        <div>
-            <div class="total-chart-title">信息数量分布图</div>
-            <canvas class="bar" id="bar${canvasNum}"></canvas>
-        </div>
-        <div>
-            <div class="total-chart-title">信息类型分布图</div>
-            <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
+        <div class="total-chart-grid">
+            <self-tabs :items="types" v-model="type"></self-tabs>
+            <div v-show="type===0">
+                ${table}
+            </div>
+            <div v-show="type===1">
+                <canvas class="bar" id="bar${canvasNum}"></canvas>
+            </div>
+            <div v-show="type===2">
+                <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
+            </div>
         </div>
     </div>`,
     data:function(){
+        var types = ['信息统计表格','信息数量分布图','信息类型分布图'];
         return {
-            type: '表',
-            types: ['表','柱','饼'], 
-            startDate: moment().add(-7,'days').format('YYYY-MM-DD HH:mm:ss'),
-            endDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+            type: 0,
+            types: types.map((t,i)=>({title:t,name:i})), 
+            startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
             table: [],
             total: {
                 "total": 100,
@@ -94,6 +95,9 @@ module.exports = {
         },
         changeType(type) {
             this.type = type;
+        },
+        gotoList(type) {
+            this.$router.push({name:'list', query: {type: type}});
         }
     }
 };

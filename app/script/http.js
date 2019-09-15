@@ -81,11 +81,18 @@ module.exports = (function () {
      * API请求
      * url地址，params参数body内容，extendData额外的处理参数的方法
      */
-    return function (url, params, extendData) {
+    return Object.assign(function(url, params){
+        var paramsStr = Object.keys(params||{}).map(i=>`${i}=${params[i]}`).join('&');
+        return httpFn(url + (paramsStr?(/\?/.test(url)?'&':'?'):'') + paramsStr)
+    }, {
+        post: httpFn
+    })
+    
+    function httpFn(url, params, extendData) {
         togleLoading(url, 1);
         waitTimeout();
         if(/^\?/.test(url)){
-            url = href + url.slice(1);
+            url = href + '/' + url.slice(1);
             return new Promise(function (succ) {
                 fetch(url).then(r => r.json()).then(function (res) {
                     togleLoading(url, -1);
@@ -93,7 +100,7 @@ module.exports = (function () {
                 });
             });
         }else if (/^\./.test(url)) {
-            url = location.origin + '/yuefeng/' + url.slice(2);
+            url = location.origin + '/xinyu/' + url.slice(2);
             return new Promise(function (succ) {
                 fetch(url, { method: 'POST', body: JSON.stringify(params) }).then(r => r.json()).then(function (res) {
                     togleLoading(url, -1);
@@ -101,7 +108,7 @@ module.exports = (function () {
                 });
             });
         } else {
-            url = window.baseurl + url.replace(/\[.*\]/, '');
+            url = window.baseurl + '/' + url.replace(/\[.*\]/, '');
             return new Promise(function (resole, reject) {
                 if (init) {
                     http(url, params, extendData, requestCount).then(resole, reject);
@@ -129,17 +136,17 @@ module.exports = (function () {
             }
             try {
                 fetch(url, {
-                    method: 'POST',
+                    method: bodyData ? 'POST' : 'GET',
                     headers: headers,
                     body: bodyData
                 }).then(r => r.text()).then(function (res) {
                     var respon = JSON.parse(res||'{}');
 
-                    if (!respon.error_code || respon.error_code == 100) {
+                    if (!respon.code || respon.code == 1000) {
                         console.log(url, JSON.parse(JSON.stringify(params||null)),respon.data);
                         togleLoading(url, -1);
                         resole(respon.data);
-                    }else if(respon.error_code == 813 && rCount>0){
+                    }else if(respon.code == 813 && rCount>0){
                         console.log(url, JSON.parse(JSON.stringify(params||null)),respon.message +',重新发起请求');
                         http(url, params, extendData, rCount-1).then(resole, reject);
                     }else {
@@ -153,6 +160,7 @@ module.exports = (function () {
                     }
                 },error=>{
                     togleLoading(url, error.message);
+                    require('./common').root().$router.push({name:'error',query:{errors:error.message}});
                 });
             }
             catch (e) {
@@ -167,11 +175,10 @@ module.exports = (function () {
      */
     function manageError(error) {
         var APP = require('./common').root();
-        switch (error.error_code) {
+        switch (error.code) {
             case 99:
                 APP.$router.push({name:'login'});
                 return false;
-                break;
             default:
                 break;
         }

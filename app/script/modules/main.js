@@ -6,6 +6,7 @@ var changepassword = require('./main/components/changepassword');
 
 var home = require('./main/home');
 var detail = require('./main/detail');
+var error = require('./main/error');
 
 /**
  * 承载所有页面的容器
@@ -14,6 +15,7 @@ module.exports = {
     routers: [
         { name: 'home', path: '/home', component: home, children: home.routers },
         { name: 'detail', path: '/detail', component: detail },
+        { name: 'error', path: '/error', component: error },
     ],
     components: {
         changepassword: changepassword
