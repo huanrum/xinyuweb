@@ -54,7 +54,7 @@ module.exports = {
     },
     methods: {
         organList(page) {
-            service.organList(this.$route.query.type, page, this.pagesize, this.startDate,this.endDate,this.message,this.searchType,this.search).then(data => {
+            service.organList(this.$route.query.type, page||1, this.pagesize, this.startDate,this.endDate,this.message,this.searchType,this.search).then(data => {
                 this.items = data.rows;
                 this.datacount = data.total;
             })
