@@ -43,7 +43,9 @@ module.exports = {
     created () {
         this.msgTotal();
         this.getTypes();
-        common.event('cata_one', type => this.active = type);
+        common.event('cata_one', type => {
+            this.active = type
+        });
     },
     beforeDestroy () {
         common.event('cata_one', null);

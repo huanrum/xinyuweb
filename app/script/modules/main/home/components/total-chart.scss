@@ -44,7 +44,12 @@
             padding: 5px;
             text-align: center;
             a{
-                color: #00aaef;
+                cursor: pointer;
+                color: #00aaef!important;
+            }
+            a:hover{
+                opacity: 0.8;
+                text-decoration: underline!important;
             }
         }
         th{

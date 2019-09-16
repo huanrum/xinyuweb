@@ -68,8 +68,8 @@ module.exports = (function(){
                 }else if(fn === null){
                     events[type] = null;
                 }else {
-                    (events[type] || []).forEach(function(fn){
-                        fn.apply(this, Array.prototype.slice(arguments,1));
+                    (events[type] || []).forEach(fn => {
+                        fn.apply(this, Array.prototype.slice.call(arguments,1));
                     });
                 }
             };

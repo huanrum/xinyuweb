@@ -4,7 +4,7 @@ var service = require('../../../../service');
 
 var canvasNum = Date.now();
 var table = `
-            <table border="1" v-if="!!table.length">
+            <table border="1" v-if="!!table.length" class="total-chart-table">
                 <tr>
                     <th>区域</th>
                     <th v-for="column in table[0].items">{{column.src_name}}</th>
@@ -12,8 +12,8 @@ var table = `
                 </tr>
                 <tr v-for="t in table">
                     <td>{{t.typename}}</td>
-                    <td v-for="it in t.items" @click="gotoList(t.cata_one)">{{it.count}}</td>
-                    <td>{{t.count}}</td>
+                    <td v-for="it in t.items" @click="gotoList(t.cata_one)"><a>{{it.count}}</a></td>
+                    <td><a>{{t.count}}</a></td>
                 </tr>
             </table>
 `
@@ -68,7 +68,6 @@ module.exports = {
         this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {
             legend:{display:false}, 
             scaleShowGridLines : true,//柱状条边框的宽度
-            barStrokeWidth: 2,
         });
         this.getTotal();
     },
@@ -87,7 +86,7 @@ module.exports = {
                 this.table = data.table;
                 
                 this.bar.data.labels = data.table.map(i=>i.typename);
-                this.bar.data.datasets[0] = {data:data.table.map(i=>i.count)};
+                this.bar.data.datasets[0] = {backgroundColor:'#333333', data:data.table.map(i=>i.count)};
                 this.bar.update();
 
                 this.pie.data.labels = data.table[0].items.map(i=>i.src_name);

@@ -145,7 +145,7 @@ module.exports = (function () {
                 }).then(r => r.text()).then(function (res) {
                     var respon = JSON.parse(res||'{}');
 
-                    if (!respon.code || respon.code == 1000) {
+                    if (!respon.code || respon.code == 1000 || !/^[0-9]+$.test(respon.code)/) {
                         common.log(url, JSON.parse(JSON.stringify(params||null)),respon.data);
                         togleLoading(url, -1);
                         resole(respon.data);

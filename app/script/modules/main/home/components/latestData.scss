@@ -1,7 +1,7 @@
 
 .list-card{
     min-width: 400px;
-    max-width: 600px;
+    max-width: 500px;
     border: 1px solid #00aaef;
     .list-card-title{
         padding: 2px 8px;
@@ -40,15 +40,16 @@
                 opacity: 0.8;
             }
             .row1{
+                padding: 0 8px;
+                    overflow:hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 a{
                     color:#00aaef;
                     padding-right: 8px;
                 }
                 span{
-                    padding: 0 8px;
-                    overflow:hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
+                    
                 }
                 i{
                     float: right;
