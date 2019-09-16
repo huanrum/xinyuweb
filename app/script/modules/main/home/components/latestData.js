@@ -42,9 +42,9 @@ module.exports = {
         openDetail(item){
             window.open(location.href.replace(location.hash, '#/detail?id=' + item.id));
         },
-        gotoList(type) {
-            common.event('cata_one', type);
-            this.$router.push({name:'list', query: {type: type}});
+        gotoList() {
+            common.event('cata_one', this.type.cata_one);
+            this.$router.push({name:'list', query: {type: this.type.cata_one}});
         }
     }
 };

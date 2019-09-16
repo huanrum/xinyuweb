@@ -36,6 +36,9 @@ module.exports = {
             });
         },
         mark(str){
+            (this.lightKeywords||[]).forEach(keyItem =>{
+                str = str.replace(new RegExp('('+keyItem.cata_two+')','g'),'<span style="color:red">$1</span>');
+            });
             return (str || '').replace(/\n/g,'<br>');
         }
     }

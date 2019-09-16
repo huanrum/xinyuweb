@@ -108,7 +108,7 @@ module.exports = (function () {
                 });
             });
         } else {
-            url = window.baseurl + '/' + url.replace(/\[.*\]/, '');
+            url = window.baseurl.replace(/\/*\s*$/,'') + '/' + url.replace(/\[.*\]/, '');
             return new Promise(function (resole, reject) {
                 if (init) {
                     http(url, params, extendData, requestCount).then(resole, reject);
@@ -135,7 +135,7 @@ module.exports = (function () {
                 bodyData = extendData(bodyData,headers);
             }
             if(!/login/.test(url)){
-                headers.token = common.storage('token');
+                headers.authorization = common.storage('token');
             }
             try {
                 fetch(url, {

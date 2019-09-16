@@ -21,23 +21,17 @@ module.exports = {
     },
     data:function(){
         return {
-            msgTotals: [],
             types: []
         }
     },
     created () {
-        this.msgTotal();
+        service.msgTotal();
         this.getTypes();
     },
     methods: {
-        msgTotal() {
-            service.msgTotal().then(res => {
-                this.msgTotals = res
-            });
-        },
         getTypes() {
             service.organ().then(res => {
-                this.types = res.map(i => Object.assign(i,{title:i.name}))
+                this.types = (res||[]).map(i => Object.assign(i,{title:i.name}))
             });
         }
     }

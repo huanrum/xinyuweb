@@ -203,13 +203,13 @@
                 e.target.blur();
                 laydate.render({
                     type: type.trim(),
-                    elem: e.target //指定元素
-                });
-                e.target.addEventListener('blur',function(){
-                    setTimeout(function(){
-                        fireEvent(e.target,'input');
-                        fireEvent(e.target,'change');
-                    },500);
+                    elem: e.target, //指定元素
+                    done: function(){
+                        setTimeout(function(){
+                            fireEvent(e.target,'input');
+                            fireEvent(e.target,'change');
+                        },500);
+                    }
                 });
                 setTimeout(()=>{
                     e.target.focus();

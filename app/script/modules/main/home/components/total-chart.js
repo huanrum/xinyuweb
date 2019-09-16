@@ -61,8 +61,15 @@ module.exports = {
         }
     },
     mounted () {
-        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {responsive: true,legend: {position: 'right'}});
-        this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {legend:{display:false}, scaleShowGridLines : true});
+        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {
+            responsive: true,
+            legend: {position: 'right'}
+        });
+        this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {
+            legend:{display:false}, 
+            scaleShowGridLines : true,//柱状条边框的宽度
+            barStrokeWidth: 2,
+        });
         this.getTotal();
     },
     methods: {

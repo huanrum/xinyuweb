@@ -51,12 +51,12 @@ module.exports = {
     methods: {
         msgTotal() {
             service.msgTotal().then(res => {
-                this.msgTotals = res;
+                this.msgTotals = res || [];
             });
         },
         getTypes() {
             service.organ().then(res => {
-                this.types = [{name:'首页',cata_one:''}].concat(res);
+                this.types = [{name:'首页',cata_one:''}].concat(res || []);
             });
         },
 

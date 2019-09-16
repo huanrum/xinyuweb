@@ -21,6 +21,7 @@ module.exports = {
     </div>`,
     data:function(){
         const searchTypes = ['全文匹配','精确匹配'].map((v,i)=>({title:v,name:i}));
+        const switchTag = tag => tag!=='热点'?'热点':'非热点';
         return {
             pagesize: 10,
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
@@ -33,8 +34,7 @@ module.exports = {
                 {title:'发布时间', field:'data_rksj_create', filter: 'date'}
             ],
             actions:[
-                {title: '热点', fn: (e,item) => this.updatetag(item, '热点')},
-                {title: '非热点', fn: (e,item) => this.updatetag(item, '非热点')}
+                {title: i=>switchTag(i.tag), fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
             ],
             datacount: 0,
             items: []
@@ -51,12 +51,15 @@ module.exports = {
     methods: {
         organList(page) {
             service.organList(this.$route.query.type, page||1, this.pagesize, this.startDate,this.endDate,this.searchType,this.search).then(data => {
-                this.items = data.rows;
+                this.items = data.rows.map(i=>Object.assign(i,{tag:i.tag||null}));
                 this.datacount = data.total;
             })
         },
         updatetag(item, tag){
-            service.updatetag(item.id,tag).then(() => item.fire = !item.fire);
+            service.updatetag(item.id,tag).then(() => {
+                item.tag = tag;
+                setTimeout(common.dialog({width:'200px'},'<div>标记为' + tag + '成功</div>'), 2000);
+            });
         },
         titleHtml(item){
             return `
