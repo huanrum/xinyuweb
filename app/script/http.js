@@ -134,6 +134,9 @@ module.exports = (function () {
             if(extendData){
                 bodyData = extendData(bodyData,headers);
             }
+            if(!/login/.test(url)){
+                headers.token = common.storage('token');
+            }
             try {
                 fetch(url, {
                     method: bodyData ? 'POST' : 'GET',

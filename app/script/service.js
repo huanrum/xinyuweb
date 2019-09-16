@@ -76,14 +76,17 @@ module.exports = (function () {
          * 分类信息
          */
         latestData(organType){
-            var date = common.storage('latestData-date');
-            return http('/summary/latestData', {date,organType});
+            var parms = {organType};
+            if(common.storage('latestData-date')){
+                parms.date = common.storage('latestData-date')
+            }
+            return http('/summary/latestData', parms);
         },
         /**
          * 分类信息
          */
-        organList(organType, pageNo, pageSize, startDate, endDate, inforType, isAccurate, keyword){
-            return http('/summary/organList', {organType, pageNo, pageSize, startDate, endDate, inforType, isAccurate, keyword});
+        organList(organType, pageNo, pageSize, startDate, endDate, isAccurate, keyword){
+            return http('/summary/organList', {organType, pageNo, pageSize, startDate, endDate, isAccurate, keyword});
         },
         /**
          * 修改是否为热点

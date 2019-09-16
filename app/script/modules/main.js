@@ -94,6 +94,7 @@ module.exports = {
             this.$router.push({name:'login'});
         },
         godefault:function(){
+            common.event('cata_one', '');
             this.$router.push({name:'landing'});
         }
     }

@@ -10,7 +10,6 @@ module.exports = {
                 <input type="date" v-model="startDate" placeholder="输入开始时间">
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
             </span>
-            <self-tabs :items="messageTypes" v-model="message"></self-tabs>
             <self-tabs :items="searchTypes" v-model="searchType"></self-tabs>
             <input type="text" autocomplete v-model="search" placeholder="输入关键字">
             <button @click="organList">查询</button>
@@ -21,16 +20,13 @@ module.exports = {
         </div>
     </div>`,
     data:function(){
-        const messageTypes = ["全部","新闻","论坛","微博","微信"].map((v,i)=>({title:v,name:i?v:''}));
         const searchTypes = ['全文匹配','精确匹配'].map((v,i)=>({title:v,name:i}));
         return {
             pagesize: 10,
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
-            message: messageTypes[0].name,
             searchType: searchTypes[0].name,
             search:'',
-            messageTypes: messageTypes,
             searchTypes: searchTypes,
             columns:[
                 {title:'标题', field:'title',formatter: this.titleHtml, width: '80%',fn: this.titleAction},
@@ -54,7 +50,7 @@ module.exports = {
     },
     methods: {
         organList(page) {
-            service.organList(this.$route.query.type, page||1, this.pagesize, this.startDate,this.endDate,this.message,this.searchType,this.search).then(data => {
+            service.organList(this.$route.query.type, page||1, this.pagesize, this.startDate,this.endDate,this.searchType,this.search).then(data => {
                 this.items = data.rows;
                 this.datacount = data.total;
             })

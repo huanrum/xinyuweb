@@ -57,6 +57,24 @@ module.exports = (function(){
             });
         },
         /**
+         * 时间处理
+         */
+        event:(function(){
+            var events = {};
+            return function(type, fn){
+                if(typeof fn === 'function'){
+                    events[type] = events[type] || [];
+                    events[type].push(fn);
+                }else if(fn === null){
+                    events[type] = null;
+                }else {
+                    (events[type] || []).forEach(function(fn){
+                        fn.apply(this, Array.prototype.slice(arguments,1));
+                    });
+                }
+            };
+        })(),
+        /**
          * 存取账号信息
          */
         account:function(value){

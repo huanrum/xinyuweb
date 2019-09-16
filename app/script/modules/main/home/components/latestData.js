@@ -1,4 +1,5 @@
 var moment = require('../../../../../lib/moment');
+var common = require('../../../../common');
 var service = require('../../../../service');
 
 module.exports = {
@@ -6,8 +7,9 @@ module.exports = {
     template: `<div class="list-card">
         <div class="list-card-title">
             <span>{{type.name}}</span>
-            <span v-show="!!totalToday()">[今日 {{totalToday()}}]</span>
+            <span>(今日 {{totalToday()}} 条)</span>
             <a @click="latestData">刷新</a>
+            <a @click="gotoList">更多</a>
         </div>
         <div class="list-card-noitem" v-show="!items.length"><span>没有数据</span></div>
         <ul class="list-card-content">
@@ -39,6 +41,10 @@ module.exports = {
         },
         openDetail(item){
             window.open(location.href.replace(location.hash, '#/detail?id=' + item.id));
+        },
+        gotoList(type) {
+            common.event('cata_one', type);
+            this.$router.push({name:'list', query: {type: type}});
         }
     }
 };

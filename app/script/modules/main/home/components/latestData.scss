@@ -11,6 +11,9 @@
         a{
             float: right;
             cursor: pointer;
+            &+a{
+                margin-right: 15px;
+            }
         }
     }
     .list-card-noitem{
