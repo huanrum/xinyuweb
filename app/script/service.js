@@ -64,7 +64,7 @@ module.exports = (function () {
                     http('statistical/organ2', {startDate:startDate, endDate:endDate}).then(res => {
                         res.table = (common.cache('cata_ones') || []).map(cata => {
                             var t = res.table.filter(i => i.cata_one === cata.cata_one).pop();
-                            return Object.assign({},cata,t||{count:0})
+                            return Object.assign({},cata,{typename:cata.name,count:0},t||{})
                         });
                         res.table.forEach(i => {
                             var items = i.items || [];
