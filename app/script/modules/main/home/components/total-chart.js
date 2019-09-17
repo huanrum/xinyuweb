@@ -23,7 +23,7 @@ module.exports = {
     template: `
     <div class="total-chart">
         <div class="total-chart-left">
-            <self-tabs :items="types" v-model="type"></self-tabs>
+            <self-tabs :items="types" @tab="changeType"></self-tabs>
             <div class="total-chart-info" v-if="!!total">
                 自 <a>{{startDate|date}}</a> 至 <a>{{endDate|date}}</a>
                 新余市检察院_环境 共采集 <a>{{total.total}}</a> 数据，
@@ -43,7 +43,6 @@ module.exports = {
             </div>
             <div v-show="type===1">
                 <canvas class="bar" id="bar${canvasNum}"></canvas>
-                <div style="position: absolute;width: 120px;height: 25px;background: #ffffff;top: 12px;left: 323px;"></div>
             </div>
             <div v-show="type===2">
                 <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
@@ -63,17 +62,34 @@ module.exports = {
     },
     mounted () {
         this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {
-            responsive: true,
-            legend: {position: 'right'}
+            options:{
+                legend: {
+                    position: 'right'
+                }
+            }
+            
         });
         this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {
-            legend:{display:false}, 
-            scaleShowGridLines : true,//柱状条边框的宽度
+            options:{
+                legend: {
+                    display: false
+                },
+                title:{
+                    position: 'bottom'
+                }
+            }
         });
         this.getTotal();
     },
     methods: {
         getTotal() {
+            service.organ1(this.startDate, this.endDate).then(data => {
+                this.total = data.total;
+                this.items = data.table;
+                this.refeshUi();
+            })
+        },
+        refeshUi(){
             const sum = (args) => {
                 var result = 0;
                 args.forEach(i=>result+=i);
@@ -82,21 +98,25 @@ module.exports = {
             const color = (args) => {
                 return args.map((v,i) => '#' + new Date(10000).setYear(i).toString(16).slice(-8, -2));
             }
-            service.organ1(this.startDate, this.endDate).then(data => {
-                this.total = data.total;
-                this.table = data.table;
-                
-                this.bar.data.labels = data.table.map(i=>i.typename);
-                this.bar.data.datasets[0] = {backgroundColor:'#333333', data:data.table.map(i=>i.count)};
-                this.bar.update();
-
-                this.pie.data.labels = data.table[0].items.map(i=>i.src_name);
-                this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(data.table.map(t=>t.items[i].count)))};
-                this.pie.update();
-            })
+            switch(this.type){
+                case 0:
+                    this.table = this.items;
+                break;
+                case 1:
+                    this.bar.data.labels = this.items.map(i=>i.typename);
+                    this.bar.data.datasets[0] = {backgroundColor:color(this.items), data:this.items.map(i=>i.count)};
+                    this.bar.update();
+                    break;
+                case 2:
+                    this.pie.data.labels = this.items[0].items.map(i=>i.src_name);
+                    this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(this.items.map(t=>t.items[i].count)))};
+                    this.pie.update();
+                    break;
+            }
         },
         changeType(type) {
             this.type = type;
+            setTimeout(() => this.refeshUi(), 100);
         },
         gotoList(type) {
             common.event('cata_one', type);
