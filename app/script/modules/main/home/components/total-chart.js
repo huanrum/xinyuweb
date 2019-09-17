@@ -23,11 +23,7 @@ module.exports = {
     template: `
     <div class="total-chart">
         <div>
-            <div class="total-chart-search">
-                <input type="date" v-model="startDate" placeholder="输入开始时间">
-                <input type="date" v-model="endDate" placeholder="输入结束时间">
-                <button @click="getTotal">查询</button>
-            </div>
+            <self-tabs :items="types" v-model="type"></self-tabs>
             <div class="total-chart-info" v-if="!!total">
                 自 <a>{{startDate|date}}</a> 至 <a>{{endDate|date}}</a>
                 新余市检察院_环境 共采集 <a>{{total.total}}</a> 数据，
@@ -35,9 +31,13 @@ module.exports = {
                 平均舆情态势值为 <a>{{total.average}}</a> 条，
                 其中舆情高峰出现在 <a>{{total.peakDate}}</a> ，峰值为 <a>{{total.peakData}}</a> 条。
             </div>
+            <div class="total-chart-search">
+                <input type="date" v-model="startDate" placeholder="输入开始时间">
+                <input type="date" v-model="endDate" placeholder="输入结束时间">
+                <button @click="getTotal">查询</button>
+            </div>
         </div>
         <div class="total-chart-grid" v-show="!!table.length">
-            <self-tabs :items="types" v-model="type"></self-tabs>
             <div v-show="type===0">
                 ${table}
             </div>

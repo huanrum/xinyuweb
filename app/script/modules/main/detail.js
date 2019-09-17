@@ -10,7 +10,7 @@ module.exports = {
         </div>
         <div class="detail-info">
             <div>
-                <span>发布时间 <a>{{subInfo.data_rksj_create|date}}</a></span><span>作者 <a>{{subInfo.authors||'###'}}</a></span> <span>来源 <a>{{subInfo.src_name}}</a></span>
+                <span>发布时间 <a>{{subInfo.pub_time|date}}</a></span><span>作者 <a>{{subInfo.authors||'###'}}</a></span> <span>来源 <a>{{subInfo.src_name}}</a></span>
             </div>
             <div>
                 <span>一级分类 <a>{{subInfo.cata_one|cata_one}}</a></span><span>机构 <a>{{subInfo.cata_one|cata_one}}</a><span>

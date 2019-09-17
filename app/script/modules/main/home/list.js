@@ -30,14 +30,14 @@ module.exports = {
             search:'',
             searchTypes: searchTypes,
             columns:[
-                {title:'标题', field:'title',formatter: this.titleHtml, width: '80%',fn: this.titleAction},
+                {title:'标题', field:'title',formatter: this.titleHtml, width: '70%',fn: this.titleAction},
                 {title:'采集时间', field:'data_rksj_create', filter: 'date'},
                 {title:'发布时间', field:'pub_time', filter: 'date'}
             ],
             actions:[
                 {
-                    title: i=>switchTag(i.tag) +'新闻', 
-                    class: i=>switchTag(i.tag) !=='热点' ? 'flag-fire': 'flag-unfire',
+                    title: i=>`标记${switchTag(i.tag)}`, 
+                    class: i=>`self-icon ${ switchTag(i.tag) !=='热点' ? 'flag-fire': 'flag-unfire'}`,
                     fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
             ],
             datacount: 0,

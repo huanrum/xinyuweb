@@ -244,3 +244,14 @@ input:-ms-input-placeholder {
         text-decoration: none;
     }
 }
+
+.self-icon{
+    width:20px;
+    height:20px;
+    content: "++";
+    color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
