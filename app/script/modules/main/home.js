@@ -25,7 +25,7 @@ module.exports = {
                     <span>条</span>
                 </span>
             </div>
-            <div class="home-page-content">
+            <div class="home-page-content" v-if="!!this.types.length">
                 <transition :name="transitionName" mode="out-in">
                     <router-view></router-view>
                 </transition>

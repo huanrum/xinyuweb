@@ -36,7 +36,7 @@ module.exports = {
             ],
             actions:[
                 {
-                    title: i=>switchTag(i.tag), 
+                    title: i=>switchTag(i.tag) +'新闻', 
                     class: i=>switchTag(i.tag) !=='热点' ? 'flag-fire': 'flag-unfire',
                     fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
             ],

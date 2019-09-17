@@ -62,8 +62,12 @@ module.exports = (function () {
             return new Promise(function(resolve){
                 http('summary/typeList').then(function(columns){
                     http('statistical/organ2', {startDate:startDate, endDate:endDate}).then(res => {
+                        res.table = (common.cache('cata_ones') || []).map(cata => {
+                            var t = res.table.filter(i => i.cata_one === cata.cata_one).pop();
+                            return Object.assign({},cata,t||{count:0})
+                        });
                         res.table.forEach(i => {
-                            var items = i.items;
+                            var items = i.items || [];
                             i.items = columns.map(c => items.filter(m => m.src_name === c.src_name).pop() || {src_name:c.src_name,count:0});
                         });
                         resolve(res);

@@ -13,12 +13,12 @@ module.exports = {
         </div>
         <div class="list-card-noitem" v-show="!items.length"><span>没有数据</span></div>
         <ul class="list-card-content">
-            <li class="list-card-content-item" v-for="item in items" @click="openDetail(item)">
+            <li class="list-card-content-item" v-for="item in items.slice(0,10)" @click="openDetail(item)">
                 <div class="row1" :title="item.summary">
                     <a>[{{item.src_name}}]</a><span>{{item.title}}</span>
                 </div>
                 <div class="row2">
-                    <small>机构 {{item.cata_one|cata_one}}</small><i>{{item.data_rksj_create|date('MM-DD HH:mm')}}</i>
+                    <small>机构 {{item.cata_one|cata_one}}</small><i>{{item.pub_time|date('MM-DD HH:mm')}}</i>
                 </div>
             </li>
         </ul>
