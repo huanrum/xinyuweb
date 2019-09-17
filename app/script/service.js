@@ -60,15 +60,14 @@ module.exports = (function () {
          */
         organ1:function(startDate, endDate){
             return new Promise(function(resolve){
-                http('statistical/organ2', {startDate:startDate, endDate:endDate}).then(res => {
-                    var columns = {};
-                    res.table.forEach(i => i.items.forEach(i=>columns[i.src_name] = true));
-                    columns = Object.keys(columns);
-                    res.table.forEach(i => {
-                        var items = i.items;
-                        i.items = columns.map(c => items.filter(m => m.src_name === c).pop() || {src_name:c,count:0});
+                http('summary/typeList').then(function(columns){
+                    http('statistical/organ2', {startDate:startDate, endDate:endDate}).then(res => {
+                        res.table.forEach(i => {
+                            var items = i.items;
+                            i.items = columns.map(c => items.filter(m => m.src_name === c.src_name).pop() || {src_name:c.src_name,count:0});
+                        });
+                        resolve(res);
                     });
-                    resolve(res);
                 });
             });
         },

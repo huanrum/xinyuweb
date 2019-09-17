@@ -15,10 +15,10 @@ module.exports = {
         <ul class="list-card-content">
             <li class="list-card-content-item" v-for="item in items" @click="openDetail(item)">
                 <div class="row1" :title="item.summary">
-                    <a>[{{item.src_name}}]</a><span>{{item.title}}</span><i>{{item.data_rksj_create|date('MM-DD HH:mm')}}</i>
+                    <a>[{{item.src_name}}]</a><span>{{item.title}}</span>
                 </div>
                 <div class="row2">
-                    <span>机构 {{item.cata_one|cata_one}}</span>
+                    <small>机构 {{item.cata_one|cata_one}}</small><i>{{item.data_rksj_create|date('MM-DD HH:mm')}}</i>
                 </div>
             </li>
         </ul>

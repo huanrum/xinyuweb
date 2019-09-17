@@ -24,17 +24,21 @@ module.exports = {
         const switchTag = tag => tag!=='热点'?'热点':'非热点';
         return {
             pagesize: 10,
-            startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
-            endDate: moment().format('YYYY-MM-DD'),
+            startDate: this.$route.query.start || moment().add(-7,'days').format('YYYY-MM-DD'),
+            endDate: this.$route.query.end || moment().format('YYYY-MM-DD'),
             searchType: searchTypes[0].name,
             search:'',
             searchTypes: searchTypes,
             columns:[
                 {title:'标题', field:'title',formatter: this.titleHtml, width: '80%',fn: this.titleAction},
-                {title:'发布时间', field:'data_rksj_create', filter: 'date'}
+                {title:'采集时间', field:'data_rksj_create', filter: 'date'},
+                {title:'发布时间', field:'pub_time', filter: 'date'}
             ],
             actions:[
-                {title: i=>switchTag(i.tag), fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
+                {
+                    title: i=>switchTag(i.tag), 
+                    class: i=>switchTag(i.tag) !=='热点' ? 'flag-fire': 'flag-unfire',
+                    fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
             ],
             datacount: 0,
             items: []

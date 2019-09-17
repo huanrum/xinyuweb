@@ -12,6 +12,11 @@ module.exports = {
         { name: 'list', path: '/list', component: list },
     ],
     template: `<div class="home-page">
+            <div class="tabs type-tabs">
+                <div v-for="menu in types" @click="gotoList(menu.cata_one)" :class="{'active':menu.cata_one==active}">
+                    <i :class="'tab-'+menu.cata_one"></i><span>{{menu.name|language}}</span><sup v-if="!!menu.count">{{menu.count}}</sup>
+                </div>
+            </div>
             <div class="home-msgTotal" v-if="!!msgTotals.length">
                 <span>24 小时监测到</span>
                 <span class="home-msgTotal-item" v-for="mt in msgTotals">
@@ -20,12 +25,7 @@ module.exports = {
                     <span>条</span>
                 </span>
             </div>
-            <div class="tabs type-tabs">
-                <div v-for="menu in types" @click="gotoList(menu.cata_one)" :class="{'active':menu.cata_one==active}">
-                    <i :class="'tab-'+menu.name"></i><span>{{menu.name|language}}</span><sup v-if="!!menu.count">{{menu.count}}</sup>
-                </div>
-            </div>
-            <div>
+            <div class="home-page-content">
                 <transition :name="transitionName" mode="out-in">
                     <router-view></router-view>
                 </transition>

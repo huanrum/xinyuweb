@@ -1,5 +1,6 @@
 var Chartjs = require('../../../../../lib/Chart');
 var moment = require('../../../../../lib/moment');
+var common = require('../../../../common');
 var service = require('../../../../service');
 
 var canvasNum = Date.now();
@@ -98,7 +99,8 @@ module.exports = {
             this.type = type;
         },
         gotoList(type) {
-            this.$router.push({name:'list', query: {type: type}});
+            common.event('cata_one', type);
+            this.$router.push({name:'list', query: {type: type,start:this.startDate,end:this.endDate}});
         }
     }
 };
