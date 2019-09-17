@@ -1,12 +1,18 @@
 .home-page{
     .home-msgTotal{
         margin-left: 20px;
+        strong{
+            padding-left: 20px;
+            font-size: 24px;
+            color: #993333;
+        }
         .home-msgTotal-item{
-            font-weight: 400;
+            color: #333333;
             a{
                 cursor: pointer;
-                color:#74142c!important;
+                color: #fd2323 !important;
                 text-decoration: underline;
+                font-weight: bold;
             }
         }
     }

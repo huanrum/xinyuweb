@@ -6,10 +6,11 @@ module.exports = {
     props: ['type'],
     template: `<div class="list-card">
         <div class="list-card-title">
+            <i class="fa fa-list-alt"></i>
             <span>{{type.name}}</span>
             <span>(今日 {{totalToday()}} 条)</span>
-            <a @click="latestData">刷新</a>
-            <a @click="gotoList">更多</a>
+            <a @click="latestData"><i class="fa fa-refresh"></i> 刷新</a>
+            <a @click="gotoList"><i class="fa fa-th-list"></i> 更多</a>
         </div>
         <div class="list-card-noitem" v-show="!items.length"><span>没有数据</span></div>
         <ul class="list-card-content">

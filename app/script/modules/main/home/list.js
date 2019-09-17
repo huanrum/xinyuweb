@@ -11,8 +11,10 @@ module.exports = {
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
             </span>
             <self-tabs :items="searchTypes" v-model="searchType"></self-tabs>
-            <input type="text" autocomplete v-model="search" placeholder="输入关键字">
-            <button @click="organList">查询</button>
+            <span class="search-input-button">
+                <input type="text" autocomplete v-model="search" placeholder="输入关键字">
+                <a @click="organList"><i class="fa fa-search"></i> <span>查询</span></a>
+            </span>
         </div>
         <br>
         <div class="children-list-grid">

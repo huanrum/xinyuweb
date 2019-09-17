@@ -22,7 +22,7 @@ var table = `
 module.exports = {
     template: `
     <div class="total-chart">
-        <div>
+        <div class="total-chart-left">
             <self-tabs :items="types" v-model="type"></self-tabs>
             <div class="total-chart-info" v-if="!!total">
                 自 <a>{{startDate|date}}</a> 至 <a>{{endDate|date}}</a>
@@ -34,7 +34,7 @@ module.exports = {
             <div class="total-chart-search">
                 <input type="date" v-model="startDate" placeholder="输入开始时间">
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
-                <button @click="getTotal">查询</button>
+                <button @click="getTotal" class=""><i class="fa fa-search"></i> <span>查询</span></button>
             </div>
         </div>
         <div class="total-chart-grid" v-show="!!table.length">
@@ -54,7 +54,7 @@ module.exports = {
         var types = ['信息统计表格','信息数量分布图','信息类型分布图'];
         return {
             type: 0,
-            types: types.map((t,i)=>({title:t,name:i})), 
+            types: types.map((t,i)=>({title:t,name:i,class:['fa fa-table','fa fa-bar-chart','fa fa-codiepie'][i]})), 
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
             table: [],

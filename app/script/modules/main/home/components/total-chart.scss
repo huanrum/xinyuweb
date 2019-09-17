@@ -5,14 +5,14 @@
     width: 100%;
     >div{
         position: relative;
-        max-width: 460px;
         padding: 10px;
+    }
+    .total-chart-left{
+        max-width: 460px;
     }
 
     .total-chart-grid{
-        max-width: 800px;
         margin-left: 20px;
-        padding-left: 150px;
         position: relative;
         .tabs{
             position: absolute;
@@ -53,8 +53,9 @@
             }
         }
         th{
-            background:#00aaef;
+            background:#165a75;
             color:#ffffff;
+            padding: 8px;
         }
     }
 

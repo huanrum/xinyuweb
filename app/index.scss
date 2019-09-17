@@ -245,7 +245,7 @@ input:-ms-input-placeholder {
     }
 }
 
-.self-icon{
+.self-icon::before{
     width:20px;
     height:20px;
     content: "++";
@@ -254,4 +254,20 @@ input:-ms-input-placeholder {
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
+}
+
+.red{
+    color:red!important;
+}
+.blue{
+    color:blue!important;
+}
+.green{
+    color:green!important;
+}
+.yellow{
+    color:yellow!important;
+}
+.ffffff{
+    color:#ffffff!important;
 }

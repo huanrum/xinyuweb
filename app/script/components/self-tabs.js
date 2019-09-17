@@ -7,7 +7,7 @@ module.exports = {
     props: ['items'],
     template:`<div class="tabs">
                 <div v-for="menu in items" @click="tab(menu.name)" :class="{'active':menu.name==active}">
-                    <i :class="'tab-'+menu.name"></i><span>{{menu.title|language}}</span>
+                    <i :class="menu.class+' tab-'+menu.name"></i><span>{{menu.title|language}}</span>
                 </div>
             </div>`,
     data:function(){
