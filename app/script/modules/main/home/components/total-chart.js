@@ -76,7 +76,30 @@ module.exports = {
                 },
                 title:{
                     position: 'bottom'
-                }
+                },
+                animation: {
+                    duration: 1,
+                    onComplete: function() {
+                        var chartInstance = this.chart,
+                        ctx = chartInstance.ctx;
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillStyle = '#006080';
+    
+                        this.data.datasets.forEach(function(dataset, i) {
+                            var meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach(function(arc, index) {
+                                var data = dataset.data[index];
+                                var ct=Math.round(arc._model.width*0.35);
+                                if(ct<12){ct=12;}
+                                ctx.font=ct+'px Arial';
+    
+                                ctx.fillText(data, arc._model.x, data>=0?arc._model.y :arc._model.y+15);
+                            });
+                        });
+                    }
+                },
             }
         });
         this.getTotal();
@@ -105,6 +128,7 @@ module.exports = {
                 case 1:
                     this.bar.data.labels = this.items.map(i=>i.typename);
                     this.bar.data.datasets[0] = {backgroundColor:color(this.items), data:this.items.map(i=>i.count)};
+                    this.bar.options.scales.yAxes[0].ticks.suggestedMax = 1.1 * Math.max.apply(Math,this.items.map(i=>i.count))
                     this.bar.update();
                     break;
                 case 2:
