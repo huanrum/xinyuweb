@@ -3,6 +3,18 @@ var moment = require('../../../../../lib/moment');
 var common = require('../../../../common');
 var service = require('../../../../service');
 
+const sum = (args) => {
+    var result = 0;
+    args.forEach(i=>result+=i);
+    return result;
+};
+const color = (args, opacity = 1) => {
+    return args.map((v,i) => {
+        var num = sum(Array.prototype.map.call(JSON.stringify(v),s=>s.charCodeAt()));
+        var color = parseInt(new Date(10000).setYear(num%200000).toString(16).slice(-8, -2),16);
+        return `rgb(${[Math.floor(color/256/256),Math.floor(color/256)%256,color%256,opacity].join()})`;
+    });
+};
 var canvasNum = Date.now();
 var table = `
             <table border="1" v-if="!!table.length" class="total-chart-table">
@@ -34,7 +46,7 @@ module.exports = {
             <div class="total-chart-search">
                 <input type="date" v-model="startDate" placeholder="输入开始时间">
                 <input type="date" v-model="endDate" placeholder="输入结束时间">
-                <button @click="getTotal" class=""><i class="fa fa-search"></i> <span>查询</span></button>
+                <a @click="getTotal" class=""><i class="fa fa-search"></i> <span> 查询</span></a>
             </div>
         </div>
         <div class="total-chart-grid" v-show="!!table.length">
@@ -61,7 +73,8 @@ module.exports = {
         }
     },
     mounted () {
-        this.pie = Chartjs.Doughnut(document.getElementById(`pie${canvasNum}`), {
+        this.pie = new Chartjs(document.getElementById(`pie${canvasNum}`), {
+            type: 'pie',
             options:{
                 legend: {
                     position: 'right'
@@ -69,37 +82,15 @@ module.exports = {
             }
             
         });
-        this.bar = Chartjs.Bar(document.getElementById(`bar${canvasNum}`), {
+        this.bar = new Chartjs(document.getElementById(`bar${canvasNum}`), {
+            type: 'horizontalBar',
             options:{
                 legend: {
                     display: false
                 },
                 title:{
                     position: 'bottom'
-                },
-                animation: {
-                    duration: 1,
-                    onComplete: function() {
-                        var chartInstance = this.chart,
-                        ctx = chartInstance.ctx;
-                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-                        ctx.fillStyle = '#006080';
-    
-                        this.data.datasets.forEach(function(dataset, i) {
-                            var meta = chartInstance.controller.getDatasetMeta(i);
-                            meta.data.forEach(function(arc, index) {
-                                var data = dataset.data[index];
-                                var ct=Math.round(arc._model.width*0.35);
-                                if(ct<12){ct=12;}
-                                ctx.font=ct+'px Arial';
-    
-                                ctx.fillText(data, arc._model.x, data>=0?arc._model.y :arc._model.y+15);
-                            });
-                        });
-                    }
-                },
+                }
             }
         });
         this.getTotal();
@@ -113,22 +104,14 @@ module.exports = {
             })
         },
         refeshUi(){
-            const sum = (args) => {
-                var result = 0;
-                args.forEach(i=>result+=i);
-                return result;
-            }
-            const color = (args) => {
-                return args.map((v,i) => '#' + new Date(10000).setYear(i).toString(16).slice(-8, -2));
-            }
             switch(this.type){
                 case 0:
                     this.table = this.items;
                 break;
                 case 1:
                     this.bar.data.labels = this.items.map(i=>i.typename);
-                    this.bar.data.datasets[0] = {backgroundColor:color(this.items), data:this.items.map(i=>i.count)};
-                    this.bar.options.scales.yAxes[0].ticks.suggestedMax = 1.1 * Math.max.apply(Math,this.items.map(i=>i.count))
+                    this.bar.data.datasets[0] = {backgroundColor:color(this.items,0.6), data:this.items.map(i=>i.count)};
+                    this.bar.options.scales.xAxes[0].ticks.suggestedMax = 1.1 * Math.max.apply(Math,this.items.map(i=>i.count))
                     this.bar.update();
                     break;
                 case 2:

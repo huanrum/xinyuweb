@@ -25,7 +25,12 @@
     }
 
     .total-chart-search{
-        
+        a{
+            cursor: pointer;
+            background: #00aaef;
+            padding: 3px 6px;
+            color: #ffffff;
+        }
     }
     .total-chart-info{
         margin: 30px;

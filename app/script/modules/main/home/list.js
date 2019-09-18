@@ -12,7 +12,8 @@ module.exports = {
             </span>
             <self-tabs :items="searchTypes" v-model="searchType"></self-tabs>
             <span class="search-input-button">
-                <input type="text" autocomplete v-model="search" placeholder="输入关键字">
+                <input type="password" name="password" style="display:none;">
+                <input type="text" autocomplete="off" v-model="search" placeholder="输入关键字">
                 <a @click="organList"><i class="fa fa-search"></i> <span>查询</span></a>
             </span>
         </div>
@@ -38,7 +39,7 @@ module.exports = {
             ],
             actions:[
                 {
-                    title: i=>`标记${switchTag(i.tag)}`, 
+                    title: i=>` 标记${switchTag(i.tag)}`, 
                     class: i=>`self-icon ${ switchTag(i.tag) !=='热点' ? 'flag-fire': 'flag-unfire'}`,
                     fn: (e,item) => this.updatetag(item, switchTag(item.tag))}
             ],
@@ -68,13 +69,14 @@ module.exports = {
             });
         },
         titleHtml(item){
-            return `
-                <div>
-                    <h4>${item.title}</h4>
-                </div>
-                <div>
-                    <span>${item.src_name} | ${common.filter('cata_one')(item.cata_one)}</span>
-                    <span><a>【详细】</a> <a>【原文】</a></span>
+            return `<div style="text-align: left;">
+                        <div>
+                            <h4>${item.title}</h4>
+                        </div>
+                        <div>
+                            <span>${item.src_name} | ${common.filter('cata_one')(item.cata_one)}</span>
+                            <span><a>【详细】</a> <a>【原文】</a></span>
+                        </div>
                 </div>
             `;
         },

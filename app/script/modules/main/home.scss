@@ -1,6 +1,6 @@
 .home-page{
     .home-msgTotal{
-        margin-left: 20px;
+        margin: 0 20px;
         strong{
             padding-left: 20px;
             font-size: 24px;
@@ -22,18 +22,18 @@
     .tabs.type-tabs{
         padding-left: 20px;
         background:#00aaef;
+        &>div{
+            color:#ffffff;
+        }
         sup{
             border-radius: 50%;
             background: red;
             color: #ffffff;
             padding: 1px 5px;
         }
-        div{
-            color:#ffffff;
-        }
         .active{
+            color:#a5f1a5;
             span{
-                color:#d3d3d3;
                 border-bottom: 2px solid;
             }
         }

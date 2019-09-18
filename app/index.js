@@ -13,14 +13,6 @@ var store = require('./script/store');
 var routers = require('./script/routers');
 var register = require('./script/register');
 
-if(window.debug){
-	return service.organ().then(() => {
-		var totalChart = require('./script/modules/main/home/components/total-chart');
-		new Vue(totalChart).$mount('#app')
-	})
-}
-
-
 /***------------------------APP------------------*/
 var APP = new Vue({
 	router: new VueRouter({
