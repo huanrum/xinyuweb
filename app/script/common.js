@@ -136,6 +136,20 @@ module.exports = (function(){
         filter: function(name){
             return Vue.filter(name);
         },
+        sum: function(args){
+            var result = 0;
+            args.forEach(i=>result+=i);
+            return result;
+        },
+        color: function(args, opacity = 1){
+            if(args instanceof Array){
+                return args.map(i => this.color(i, opacity));
+            }else{
+                var num = this.sum(Array.prototype.map.call(JSON.stringify(args),s=>s.charCodeAt()));
+                var color = parseInt(new Date(10000).setYear(num%200000).toString(16).slice(-8, -2),16);
+                return `rgb(${[Math.floor(color/256/256),Math.floor(color/256)%256,color%256,opacity].join()})`;
+            }
+        },
         /**
          * 选择文件
          */

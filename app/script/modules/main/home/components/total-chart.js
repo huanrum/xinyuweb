@@ -3,18 +3,6 @@ var moment = require('../../../../../lib/moment');
 var common = require('../../../../common');
 var service = require('../../../../service');
 
-const sum = (args) => {
-    var result = 0;
-    args.forEach(i=>result+=i);
-    return result;
-};
-const color = (args, opacity = 1) => {
-    return args.map((v,i) => {
-        var num = sum(Array.prototype.map.call(JSON.stringify(v),s=>s.charCodeAt()));
-        var color = parseInt(new Date(10000).setYear(num%200000).toString(16).slice(-8, -2),16);
-        return `rgb(${[Math.floor(color/256/256),Math.floor(color/256)%256,color%256,opacity].join()})`;
-    });
-};
 var canvasNum = Date.now();
 var table = `
             <table border="1" v-if="!!table.length" class="total-chart-table">
@@ -110,13 +98,13 @@ module.exports = {
                 break;
                 case 1:
                     this.bar.data.labels = this.items.map(i=>i.typename);
-                    this.bar.data.datasets[0] = {backgroundColor:color(this.items,0.6), data:this.items.map(i=>i.count)};
+                    this.bar.data.datasets[0] = {backgroundColor:common.color(this.items,0.6), data:this.items.map(i=>i.count)};
                     this.bar.options.scales.xAxes[0].ticks.suggestedMax = 1.1 * Math.max.apply(Math,this.items.map(i=>i.count))
                     this.bar.update();
                     break;
                 case 2:
                     this.pie.data.labels = this.items[0].items.map(i=>i.src_name);
-                    this.pie.data.datasets[0] = {backgroundColor: color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>sum(this.items.map(t=>t.items[i].count)))};
+                    this.pie.data.datasets[0] = {backgroundColor:common.color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>common.sum(this.items.map(t=>t.items[i].count)))};
                     this.pie.update();
                     break;
             }
