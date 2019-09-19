@@ -1,4 +1,4 @@
-var Chartjs = require('../../../../../lib/Chart');
+var Chart = require('../../../../../lib/highcharts');
 var moment = require('../../../../../lib/moment');
 var common = require('../../../../common');
 var service = require('../../../../service');
@@ -42,17 +42,17 @@ module.exports = {
                 ${table}
             </div>
             <div v-show="type===1">
-                <canvas class="bar" id="bar${canvasNum}"></canvas>
+                <div class="bar" id="bar${canvasNum}"></div>
             </div>
             <div v-show="type===2">
-                <canvas class="pie" id="pie${canvasNum}" width="400" height="270"></canvas>
+                <div class="pie" id="pie${canvasNum}"></div>
             </div>
         </div>
     </div>`,
     data:function(){
         var types = ['信息统计表格','信息数量分布图','信息类型分布图'];
         return {
-            type: 0,
+            type: 1,
             types: types.map((t,i)=>({title:t,name:i,class:['fa fa-table','fa fa-bar-chart','fa fa-codiepie'][i]})), 
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
@@ -61,26 +61,41 @@ module.exports = {
         }
     },
     mounted () {
-        this.pie = new Chartjs(document.getElementById(`pie${canvasNum}`), {
-            type: 'pie',
-            options:{
-                legend: {
-                    position: 'right'
+        this.pie = {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
             }
-            
-        });
-        this.bar = new Chartjs(document.getElementById(`bar${canvasNum}`), {
-            type: 'horizontalBar',
-            options:{
-                legend: {
-                    display: false
-                },
-                title:{
-                    position: 'bottom'
+        };
+
+        this.bar = {
+            chart: {
+                type: 'bar'
+            },
+            legend: {
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
                 }
             }
-        });
+        };
         this.getTotal();
     },
     methods: {
@@ -97,15 +112,24 @@ module.exports = {
                     this.table = this.items;
                 break;
                 case 1:
-                    this.bar.data.labels = this.items.map(i=>i.typename);
-                    this.bar.data.datasets[0] = {backgroundColor:common.color(this.items,0.6), data:this.items.map(i=>i.count)};
-                    this.bar.options.scales.xAxes[0].ticks.suggestedMax = 1.1 * Math.max.apply(Math,this.items.map(i=>i.count))
-                    this.bar.update();
+                    Chart.chart(document.getElementById(`bar${canvasNum}`), Object.assign(this.bar, {
+                        xAxis: {
+                            categories: this.items.map(i=>i.typename)
+                        },
+                        series: this.items[0].items.map((v,i)=>({name:v.src_name,data:this.items.map(it=>it.items[i].count)}))
+                    }));
                     break;
                 case 2:
-                    this.pie.data.labels = this.items[0].items.map(i=>i.src_name);
-                    this.pie.data.datasets[0] = {backgroundColor:common.color(this.pie.data.labels), data: this.pie.data.labels.map((v,i)=>common.sum(this.items.map(t=>t.items[i].count)))};
-                    this.pie.update();
+                    Chart.chart(document.getElementById(`pie${canvasNum}`), Object.assign(this.pie, {
+                    series: [{
+                            name: 'Brands',
+                            colorByPoint: true,
+                            data: this.items[0].items.map((v,i)=>({
+                                name: v.src_name,
+                                y: common.sum(this.items.map(t=>t.items[i].count))
+                            }))
+                        }]
+                    }));
                     break;
             }
         },
