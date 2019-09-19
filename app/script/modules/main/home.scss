@@ -25,6 +25,11 @@
         &>div{
             color:#ffffff;
         }
+        @media screen and (max-width: 500px) {
+            &>div{
+                display: block;
+            }
+        }
         sup{
             border-radius: 50%;
             background: red;

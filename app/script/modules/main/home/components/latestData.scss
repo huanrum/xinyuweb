@@ -3,6 +3,9 @@
     min-width: 400px;
     width: calc(50% - 10px);
     border: 1px solid #00aaef;
+    @media screen and (max-width: 500px) {
+        width: calc(100% - 10px);
+    }
     .list-card-title{
         padding: 8px 10px;
         background: #236912;

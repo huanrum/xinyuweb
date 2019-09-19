@@ -9,6 +9,7 @@
     .detail-info{
         margin: 15px;
         text-align: center;
+        line-height: 36px;
         a{
             color: #00aaef;
         }
@@ -18,5 +19,13 @@
     }
     .detail-content{
         padding: 0 20px;
+        line-height: 26px;
+    }
+    @media screen and (max-width: 500px) {
+        .detail-info{
+            margin: 15px;
+            text-align: left;
+            line-height: 20px;
+        }
     }
 }

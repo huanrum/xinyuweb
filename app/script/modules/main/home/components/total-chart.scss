@@ -28,8 +28,14 @@
         a{
             cursor: pointer;
             background: #00aaef;
+            margin: 8px;
             padding: 3px 6px;
             color: #ffffff;
+        }
+        @media screen and (max-width: 500px) {
+            display: block;
+            text-align: center;
+            margin: 8px 0;
         }
     }
     .total-chart-info{

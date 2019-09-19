@@ -1,9 +1,9 @@
-var Chart = require(['../../../../../lib/highcharts']);
+var Chart = require('../../../../../lib/highcharts');
 var moment = require('../../../../../lib/moment');
 var common = require('../../../../common');
 var service = require('../../../../service');
 
-require(['../../../../../lib/highcharts-3d']);
+require('../../../../../lib/highcharts-3d');
 
 var canvasNum = Date.now();
 var table = `

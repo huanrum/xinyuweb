@@ -271,3 +271,12 @@ input:-ms-input-placeholder {
 .ffffff{
     color:#ffffff!important;
 }
+
+@media screen and (max-width: 500px) {
+    .waiting-page .logo {
+        img {
+            display: block!important;
+            margin: 20px auto!important;
+        }
+    }
+}
