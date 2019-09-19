@@ -1,11 +1,13 @@
-var Chart = require('../../../../../lib/highcharts');
+var Chart = require(['../../../../../lib/highcharts']);
 var moment = require('../../../../../lib/moment');
 var common = require('../../../../common');
 var service = require('../../../../service');
 
+require(['../../../../../lib/highcharts-3d']);
+
 var canvasNum = Date.now();
 var table = `
-            <table border="1" v-if="!!table.length" class="total-chart-table">
+            <table border="1" v-if="!!table && table.length" class="total-chart-table">
                 <tr>
                     <th>区域</th>
                     <th v-for="column in table[0].items">{{column.src_name}}</th>
@@ -37,7 +39,7 @@ module.exports = {
                 <a @click="getTotal" class=""><i class="fa fa-search"></i> <span> 查询</span></a>
             </div>
         </div>
-        <div class="total-chart-grid" v-show="!!table.length">
+        <div class="total-chart-grid" v-show="!!items.length">
             <div v-show="type===0">
                 ${table}
             </div>
@@ -52,20 +54,26 @@ module.exports = {
     data:function(){
         var types = ['信息统计表格','信息数量分布图','信息类型分布图'];
         return {
-            type: 1,
+            type: 0,
             types: types.map((t,i)=>({title:t,name:i,class:['fa fa-table','fa fa-bar-chart','fa fa-codiepie'][i]})), 
             startDate: moment().add(-7,'days').format('YYYY-MM-DD'),
             endDate: moment().format('YYYY-MM-DD'),
+            items: [],
             table: [],
             total: null
         }
     },
     mounted () {
         this.pie = {
+            title:{ text: null },
+            legend: { reversed: true },
+            credits: { enabled: false },
             chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
+                options3d: {
+                    enabled: true,       //显示图表是否设置为3D
+                    alpha: 45,           //图表视图旋转角度
+                    beta: 0              //图表视图旋转角度
+                },
                 type: 'pie'
             },
             tooltip: {
@@ -75,6 +83,7 @@ module.exports = {
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
+                    depth: 35,
                     dataLabels: {
                         enabled: false
                     },
@@ -84,17 +93,25 @@ module.exports = {
         };
 
         this.bar = {
-            chart: {
-                type: 'bar'
-            },
-            legend: {
-                reversed: true
-            },
+            chart: { type: 'bar' },
+            title:{ text: null },
+            legend: { reversed: true },
+            credits: { enabled: false },
             plotOptions: {
                 series: {
-                    stacking: 'normal'
+                    stacking: 'normal',
+                    depth: 40
                 }
-            }
+            },
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                viewDistance: 25,
+                depth: 40
+            },
+            marginTop: 80,
+            marginRight: 40
         };
         this.getTotal();
     },
