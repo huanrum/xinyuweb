@@ -183,7 +183,7 @@
     })()){
         var laydate = require('../lib/laydate');
         laydate.render({
-            format:'yyyy/MM/dd',
+            format:'yyyy-MM-dd',
             elem: '' //指定元素
         });
         var fireEvent = (target,type)=>{

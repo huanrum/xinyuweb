@@ -80,6 +80,37 @@
                 }
             }
         }
+    }
+
+    @media screen and (max-width: 500px) {
+        .logo img{
+            display: block;
+            margin: 10px auto;
+        }
+        .form-group{
+            background: none;
+            .title{
+                background: #996699;
+            }
+            .form{
+                padding: 50px 0;
+                .input{
+                    position: relative;
+                    border-bottom: none;
+                    img{
+                        position: absolute;
+                        top: 12px;
+                        margin-left: 10px;
+                    }
+                    input{
+                        padding-left: 26px;
+                    }
+                }
+                .btn{
+                    background: #66aa33;
+                }
+            }
+        }
         
     }
 }

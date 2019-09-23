@@ -69,6 +69,7 @@ module.exports = (function () {
                         res.table.forEach(i => {
                             var items = i.items || [];
                             i.items = columns.map(c => items.filter(m => m.src_name === c.src_name).pop() || {src_name:c.src_name,count:0});
+                            i.total = common.sum(i.items.map(i=>i.count))
                         });
                         resolve(res);
                     });

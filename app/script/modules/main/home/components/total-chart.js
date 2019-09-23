@@ -95,7 +95,7 @@ module.exports = {
         this.bar = {
             chart: { type: 'bar' },
             title:{ text: null },
-            legend: { reversed: true },
+            legend: { reversed: true, enabled: false },
             credits: { enabled: false },
             plotOptions: {
                 series: {
@@ -133,7 +133,8 @@ module.exports = {
                         xAxis: {
                             categories: this.items.map(i=>i.typename)
                         },
-                        series: this.items[0].items.map((v,i)=>({name:v.src_name,data:this.items.map(it=>it.items[i].count)}))
+                        // series: this.items[0].items.map((v,i)=>({name:v.src_name,data:this.items.map(it=>it.items[i].count)}))
+                        series: [{data: this.items.map(i=>({y: i.count,color:common.color(i.typename)}))}]
                     }));
                     break;
                 case 2:
@@ -141,9 +142,13 @@ module.exports = {
                     series: [{
                             name: 'Brands',
                             colorByPoint: true,
-                            data: this.items[0].items.map((v,i)=>({
-                                name: v.src_name,
-                                y: common.sum(this.items.map(t=>t.items[i].count))
+                            // data: this.items[0].items.map((v,i)=>({
+                            //     name: v.src_name,
+                            //     y: common.sum(this.items.map(t=>t.items[i].count))
+                            // }))
+                            data: this.items.map(i=>({
+                                name: i.typename,
+                                y: i.count
                             }))
                         }]
                     }));

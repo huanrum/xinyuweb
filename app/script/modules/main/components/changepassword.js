@@ -9,10 +9,13 @@ module.exports = {
         </div>
         <div class="page-form">
             <div class="page-form-item">
-                <label>账号：</label><input v-model="entity.username" placeholder="请输入手机号或邮箱" disabled>
+                <label>账号：</label>
+                <input v-model="entity.username" placeholder="请输入手机号或邮箱" disabled>
             </div>
             <div class="page-form-item">
-                <label>原密码：</label><input type="password" v-model="entity.oldpassword" placeholder="输入旧密码">
+                <label>原密码：</label>
+                <input type="password" name="password" style="display:none;">
+                <input type="password" v-model="entity.oldpassword" placeholder="输入旧密码">
             </div>
             <div class="page-form-item">
                 <label>密码：</label><input type="password" v-model="entity.password" placeholder="输入新密码">

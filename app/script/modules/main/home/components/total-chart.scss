@@ -25,6 +25,9 @@
     }
 
     .total-chart-search{
+        input{
+            max-width: 174px;
+        }
         a{
             cursor: pointer;
             background: #00aaef;

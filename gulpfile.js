@@ -17,12 +17,8 @@ gulp.task("default", function () {
 		'编译css 命令 gulp sass',
 		'实时编译修改的scss文件的命令 gulp scss',
 		'\r\n',
-		'编辑需要打包可用不生成exe的文件的命令 gulp exe',
 		'编辑需要打包可发布的网站的文件的命令 gulp web',
 		'\r\n',
-		'运行客户端 npm start',
-		'生成客户端 npm run_script build',
-		'\r\n'
 	].join('\r\n'));
 	console.log('\x1B[37m');
 });
