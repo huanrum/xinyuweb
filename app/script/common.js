@@ -148,7 +148,7 @@ module.exports = (function(){
             }else{
                 var num = this.sum(Array.prototype.map.call(JSON.stringify(args),s=>s.charCodeAt()));
                 var color = parseInt(new Date(10000).setYear(num%200000).toString(16).slice(-8, -2),16);
-                return `rgb(${[Math.floor(color/256/256),Math.floor(color/256)%256,color%256,opacity].join()})`;
+                return `rgba(${[Math.floor(color/256/256),Math.floor(color/256)%256,color%256,opacity].join()})`;
             }
         },
         /**
