@@ -7,6 +7,7 @@ module.exports = (function(){
     var dialog = null,root = null,cache = {},accountRefshList = [];
     var isvalue = v=>typeof v !== 'undefined';
     var fullKey = key => '[xinyu]/'+key;
+    //API的访问域名
     var getBaseUrl = () => {
         if(localStorage[fullKey('baseUrl')]){
             return localStorage[fullKey('baseUrl')];
@@ -17,7 +18,7 @@ module.exports = (function(){
         }
     };
     return {
-        copyright:'Copyright ©2018 ky51.cn All Rights Reserved.  <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备12072665号-4</a>',
+        copyright:'Copyright ©2019 ky51.cn All Rights Reserved.  <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备XXXXXXXXX号-X</a>',
         baseurl: getBaseUrl(),
         /**
          * 一次请求的数据条数
